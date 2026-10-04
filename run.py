@@ -2,89 +2,145 @@ import os
 import sys
 
 from dotenv import load_dotenv
-from openai import OpenAI
+from langchain.chat_models import init_chat_model
+from langchain_core.tools import tool
+from langgraph.errors import GraphRecursionError
+from langgraph.graph import START, MessagesState, StateGraph
+from langgraph.prebuilt import ToolNode, tools_condition
 
 load_dotenv()
-client = OpenAI(api_key=os.environ["LLM_API_KEY"], base_url=os.environ["LLM_BASE_URL"])
-MODEL = os.environ["MODEL_CHEAP"]
 
-SYSTEM = """You are a university special course information service. You have one tool at your disposal:
-spec_course_find("<words>") — searches for a special course based on a word from its title, topic, or the day of the week it takes place.
 
-Respond strictly in the following format (one block for each step):
-Thought: what needs to be determined
-Action: spec_course_find("<words>")
-Observation: <search result>
-Once you have the answer, write:
-Final answer: <one or two sentences>"""
-STOP_RULE = "\nAfter the Action line STOP and wait: never write the Observation yourself."
-QUESTION = "What course can I take just to relax?"
+def chat_model(size: str = "cheap", **kwargs):
+    name = os.environ[f"MODEL_{size.upper()}"]
+    secret = os.environ["LLM_API_KEY"]
+    if os.getenv("LLM_REASONING_EFFORT"):
+        kwargs.setdefault("reasoning_effort", os.environ["LLM_REASONING_EFFORT"])
+    if os.getenv("LLM_PROVIDER", "openai_compat") == "google_genai":
+        return init_chat_model(f"google_genai:{name}", api_key=secret, **kwargs)
+    return init_chat_model(
+        f"openai:{name}", api_key=secret, base_url=os.environ["LLM_BASE_URL"], **kwargs
+    )
 
-SPEC_COURSES = [
-    ("Tuesday", "Chill Course", "chill"),
-    ("Friday", "LLM Agents", "llm, ai, agents"),
-]
 
-def spec_course_find(argument: str) -> str:
-    needle = argument.strip().lower()
-    hits = [c for c in SPEC_COURSES if needle in c[0].lower() or needle in c[1].lower() or needle in c[2].lower()]
+SPEC_COURSES = {
+    "sc-01": {"title": "Chill Course", "tags": "chill, relax", "day": "Tuesday",
+              "time": "18:00", "room": "Room 105", "teacher": "A. Petrov", "seats": 15},
+    "sc-02": {"title": "LLM Agents", "tags": "llm, ai, agents", "day": "Friday",
+              "time": "16:30", "room": "Room 412", "teacher": "I. Smirnov", "seats": 25},
+    "sc-03": {"title": "Computer Vision", "tags": "ai, images, cv", "day": "Monday",
+              "time": "14:00", "room": "Room 301", "teacher": "E. Volkova", "seats": 20},
+    "sc-04": {"title": "Board Game Theory", "tags": "games, math, chill", "day": "Wednesday",
+              "time": "19:00", "room": "Student club", "teacher": "D. Orlov", "seats": 3},
+    "sc-05": {"title": "Functional Programming", "tags": "haskell, math, coding", "day": "Thursday",
+              "time": "12:00", "room": "Room 214", "teacher": "M. Kuznetsova", "seats": 30},
+}
+ENROLLMENTS: dict[str, list[str]] = {}
+
+
+def _tags(course: dict) -> set[str]:
+    return {t.strip() for t in course["tags"].split(",")}
+
+
+def _free_seats(course_id: str) -> int:
+    return SPEC_COURSES[course_id]["seats"] - len(ENROLLMENTS.get(course_id, []))
+
+
+@tool
+def spec_course_find(query: str) -> str:
+    """Find university special courses by one word: a word from the title, a topic tag or a weekday, e.g. 'ai' or 'friday'. Returns course ids for spec_course_info and spec_course_enroll."""
+    needle = query.strip().lower()
+    hits = [(i, c) for i, c in SPEC_COURSES.items()
+            if needle in c["title"].lower().split() or needle in _tags(c) or needle == c["day"].lower()]
     if not hits:
-        topics = sorted({t.strip() for c in SPEC_COURSES for t in c[2].split(",")})
-        return f"No course matching {argument!r}. Try weekday or one topic word: {', '.join(topics)}."
-    return "; ".join(f"{c[0]}, {c[1]}, (keywords: {c[2]})" for c in hits)
+        tags = sorted({t for c in SPEC_COURSES.values() for t in _tags(c)})
+        return f"No course matching {query!r}. Try a weekday or one topic word: {', '.join(tags)}."
+    return "; ".join(f"{i}: {c['title']}" for i, c in hits)
 
 
-TOOL = spec_course_find
+@tool
+def spec_course_info(course_id: str) -> str:
+    """Schedule, room, teacher and free seats of a course id from spec_course_find, e.g. 'sc-01'."""
+    key = course_id.strip().lower()
+    course = SPEC_COURSES.get(key)
+    if course is None:
+        return f"No course {course_id!r}. Call spec_course_find first to get a valid id."
+    return (f"{course['title']}: {course['day']} {course['time']}, {course['room']}, "
+            f"teacher {course['teacher']}, {_free_seats(key)} seats free.")
 
 
-def parse_action(text: str) -> str | None:
-    for line in text.splitlines():
-        if line.startswith("Action:"):
-            start, end = line.find('"'), line.rfind('"')
-            if start != -1 and end > start:
-                return line[start + 1 : end]
-    return None
+@tool
+def spec_course_enroll(course_id: str, student: str) -> str:
+    """Enroll the named student in a course id from spec_course_find."""
+    key = course_id.strip().lower()
+    course = SPEC_COURSES.get(key)
+    if course is None:
+        return f"No course {course_id!r}. Call spec_course_find first to get a valid id."
+    taken = ENROLLMENTS.setdefault(key, [])
+    if student in taken:
+        return f"{student} is already enrolled in {course['title']}."
+    if _free_seats(key) <= 0:
+        return f"{course['title']} is full. Suggest another course from spec_course_find."
+    taken.append(student)
+    return f"Enrolled {student} in {course['title']}. {_free_seats(key)} seats left."
 
 
-def cut_at_observation(text: str) -> str:
-    marker = text.find("Observation:")
-    return text if marker == -1 else text[:marker].rstrip()
+TOOLS = [spec_course_find, spec_course_info, spec_course_enroll]
+SYSTEM = ("You are the university special courses desk. Use the tools before answering; "
+          "course ids come from spec_course_find. Answer briefly.")
 
 
-def run(honest: bool = True, steps: int = 5) -> list[str]:
-    messages = [{"role": "system", "content": SYSTEM + (STOP_RULE if honest else "")},
-                {"role": "user", "content": QUESTION}]
-    transcript = [f"Question: {QUESTION}"]
-    for _ in range(steps):
-        answer = client.chat.completions.create(
-            # pre-set high: hidden reasoning is billed from this budget too
-            model=MODEL, messages=messages, max_completion_tokens=2000
-        )
-        choice = answer.choices[0]
-        reply = choice.message.content or ""
-        # a budget bug, not a parser bug: name it
-        if not reply and choice.finish_reason == "length":
-            raise RuntimeError(
-                "Empty reply at the length limit: the budget went on hidden "
-                "reasoning, not on your parser. Raise max_completion_tokens."
-            )
-        if honest:
-            reply = cut_at_observation(reply)
-        transcript.append(reply)
-        print(reply)
+def build_graph():
+    bound = chat_model("cheap").bind_tools(TOOLS)
 
-        argument = parse_action(reply)
-        if argument is None:
-            break
+    def call_model(state: MessagesState) -> dict:
+        messages = [{"role": "system", "content": SYSTEM}] + state["messages"]
+        return {"messages": [bound.invoke(messages)]}
 
-        observation = f"Observation: {TOOL(argument)}"
-        transcript.append(observation)
-        print(observation)
-        messages.append({"role": "assistant", "content": reply})
-        messages.append({"role": "user", "content": observation})
-    return transcript
+    builder = StateGraph(MessagesState)
+    builder.add_node("model", call_model)
+    builder.add_node("tools", ToolNode(TOOLS))
+    builder.add_edge(START, "model")
+    builder.add_conditional_edges("model", tools_condition)
+    builder.add_edge("tools", "model")
+    return builder.compile()
+
+
+def ask(graph, text: str, callbacks: list | None = None) -> list:
+    result = graph.invoke(
+        {"messages": [{"role": "user", "content": text}]},
+        config={"recursion_limit": 12, "callbacks": callbacks or []},
+    )
+    return result["messages"]
+
+
+def trace_callbacks() -> list:
+    if not os.getenv("LANGFUSE_PUBLIC_KEY"):
+        return []
+    from langfuse import get_client
+    from langfuse.langchain import CallbackHandler
+
+    try:
+        up = get_client().auth_check()
+    except Exception as error:
+        up = type(error).__name__
+    print("langfuse:", os.getenv("LANGFUSE_HOST"), "| up:", up)
+    return [CallbackHandler()] if up is True else []
 
 
 if __name__ == "__main__":
-    # --break removes both safeties: the second transcript you commit
-    run(honest="--break" not in sys.argv)
+    graph = build_graph()
+    if "--mermaid" in sys.argv:
+        print(graph.get_graph().draw_mermaid())
+        raise SystemExit
+    question = " ".join(sys.argv[1:]) or "What course can I take just to relax? Enroll me as Sasha."
+    callbacks = trace_callbacks()
+    try:
+        for message in ask(graph, question, callbacks):
+            message.pretty_print()
+    except GraphRecursionError:
+        print("Stopped: the agent hit the step limit without a final answer.")
+    if callbacks:
+        from langfuse import get_client
+
+        get_client().flush()

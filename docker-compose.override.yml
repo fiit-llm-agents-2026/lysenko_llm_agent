@@ -1,0 +1,21 @@
+services:
+  langfuse-worker:
+    image: docker.io/langfuse/langfuse-worker:3.224.0
+  langfuse-web:
+    image: docker.io/langfuse/langfuse:3.224.0
+    environment:
+      LANGFUSE_INIT_ORG_ID: agents-course
+      LANGFUSE_INIT_ORG_NAME: LLM Agents Course
+      LANGFUSE_INIT_PROJECT_ID: assistant
+      LANGFUSE_INIT_PROJECT_NAME: My assistant
+      LANGFUSE_INIT_PROJECT_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY}
+      LANGFUSE_INIT_PROJECT_SECRET_KEY: ${LANGFUSE_SECRET_KEY}
+      LANGFUSE_INIT_USER_EMAIL: ${LANGFUSE_USER_EMAIL}
+      LANGFUSE_INIT_USER_NAME: Student
+      LANGFUSE_INIT_USER_PASSWORD: ${LANGFUSE_USER_PASSWORD}
+  postgres:
+    ports: !reset []
+    environment:
+      POSTGRES_PASSWORD: ${LANGFUSE_POSTGRES_PASSWORD:-postgres}
+  minio:
+    image: docker.io/pgsty/minio:RELEASE.2026-08-04T00-00-00Z
