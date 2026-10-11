@@ -1,12 +1,14 @@
+import json
 import os
 import sys
 
 from dotenv import load_dotenv
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_tool_call
 from langchain.chat_models import init_chat_model
 from langchain_core.tools import tool
+from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.errors import GraphRecursionError
-from langgraph.graph import START, MessagesState, StateGraph
-from langgraph.prebuilt import ToolNode, tools_condition
 
 load_dotenv()
 
@@ -46,9 +48,13 @@ def _free_seats(course_id: str) -> int:
     return SPEC_COURSES[course_id]["seats"] - len(ENROLLMENTS.get(course_id, []))
 
 
-@tool
+@tool(parse_docstring=True)
 def spec_course_find(query: str) -> str:
-    """Find university special courses by one word: a word from the title, a topic tag or a weekday, e.g. 'ai' or 'friday'. Returns course ids for spec_course_info and spec_course_enroll."""
+    """Find university special courses by one word.
+
+    Args:
+        query: A title word, a topic tag or a weekday, for example 'ai' or 'friday'. Returns course ids for spec_course_info and spec_course_enroll.
+    """
     needle = query.strip().lower()
     hits = [(i, c) for i, c in SPEC_COURSES.items()
             if needle in c["title"].lower().split() or needle in _tags(c) or needle == c["day"].lower()]
@@ -58,9 +64,13 @@ def spec_course_find(query: str) -> str:
     return "; ".join(f"{i}: {c['title']}" for i, c in hits)
 
 
-@tool
+@tool(parse_docstring=True)
 def spec_course_info(course_id: str) -> str:
-    """Schedule, room, teacher and free seats of a course id from spec_course_find, e.g. 'sc-01'."""
+    """Show the schedule, room, teacher and free seats of one course.
+
+    Args:
+        course_id: A course id from spec_course_find, for example 'sc-01'.
+    """
     key = course_id.strip().lower()
     course = SPEC_COURSES.get(key)
     if course is None:
@@ -69,9 +79,14 @@ def spec_course_info(course_id: str) -> str:
             f"teacher {course['teacher']}, {_free_seats(key)} seats free.")
 
 
-@tool
+@tool(parse_docstring=True)
 def spec_course_enroll(course_id: str, student: str) -> str:
-    """Enroll the named student in a course id from spec_course_find."""
+    """Enroll the named student in one course.
+
+    Args:
+        course_id: A course id from spec_course_find, for example 'sc-02'.
+        student: Name of the student to enroll.
+    """
     key = course_id.strip().lower()
     course = SPEC_COURSES.get(key)
     if course is None:
@@ -90,24 +105,26 @@ SYSTEM = ("You are the university special courses desk. Use the tools before ans
           "course ids come from spec_course_find. Answer briefly.")
 
 
-def build_graph():
-    bound = chat_model("cheap").bind_tools(TOOLS)
-
-    def call_model(state: MessagesState) -> dict:
-        messages = [{"role": "system", "content": SYSTEM}] + state["messages"]
-        return {"messages": [bound.invoke(messages)]}
-
-    builder = StateGraph(MessagesState)
-    builder.add_node("model", call_model)
-    builder.add_node("tools", ToolNode(TOOLS))
-    builder.add_edge(START, "model")
-    builder.add_conditional_edges("model", tools_condition)
-    builder.add_edge("tools", "model")
-    return builder.compile()
+@wrap_tool_call
+def log_tool_call(request, handler):
+    print(f"[tool] {request.tool_call['name']}({request.tool_call['args']})")
+    return handler(request)
 
 
-def ask(graph, text: str, callbacks: list | None = None) -> list:
-    result = graph.invoke(
+def build_agent():
+    return create_agent(chat_model("cheap"), TOOLS, system_prompt=SYSTEM,
+                        middleware=[log_tool_call])
+
+
+def print_schemas() -> None:
+    for spec in TOOLS:
+        print(f"### {spec.name}")
+        print(json.dumps(convert_to_openai_tool(spec), indent=2))
+        print()
+
+
+def ask(agent, text: str, callbacks: list | None = None) -> list:
+    result = agent.invoke(
         {"messages": [{"role": "user", "content": text}]},
         config={"recursion_limit": 12, "callbacks": callbacks or []},
     )
@@ -129,14 +146,17 @@ def trace_callbacks() -> list:
 
 
 if __name__ == "__main__":
-    graph = build_graph()
+    if "--schemas" in sys.argv:
+        print_schemas()
+        raise SystemExit
+    agent = build_agent()
     if "--mermaid" in sys.argv:
-        print(graph.get_graph().draw_mermaid())
+        print(agent.get_graph().draw_mermaid())
         raise SystemExit
     question = " ".join(sys.argv[1:]) or "What course can I take just to relax? Enroll me as Sasha."
     callbacks = trace_callbacks()
     try:
-        for message in ask(graph, question, callbacks):
+        for message in ask(agent, question, callbacks):
             message.pretty_print()
     except GraphRecursionError:
         print("Stopped: the agent hit the step limit without a final answer.")
