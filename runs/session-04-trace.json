@@ -1,0 +1,4332 @@
+{
+ "id": "14a140b63a2db33e09369cea70324490",
+ "projectId": "assistant",
+ "name": "LangGraph",
+ "timestamp": "9999-12-31T23:59:59.000Z",
+ "environment": "default",
+ "tags": [],
+ "bookmarked": false,
+ "release": null,
+ "version": null,
+ "userId": null,
+ "sessionId": null,
+ "public": false,
+ "input": {
+  "messages": [
+   {
+    "role": "user",
+    "content": "Fine, enroll me there as well."
+   }
+  ]
+ },
+ "output": {
+  "messages": [
+   {
+    "content": "Fine, enroll me there as well.",
+    "additional_kwargs": {},
+    "response_metadata": {},
+    "type": "human",
+    "name": null,
+    "id": "400792b2-203e-43f8-b032-ed0d783ec9df"
+   },
+   {
+    "content": "",
+    "additional_kwargs": {
+     "refusal": null
+    },
+    "response_metadata": {
+     "token_usage": {
+      "completion_tokens": 61,
+      "prompt_tokens": 1140,
+      "total_tokens": 1201,
+      "completion_tokens_details": {
+       "accepted_prediction_tokens": null,
+       "audio_tokens": 0,
+       "reasoning_tokens": 0,
+       "rejected_prediction_tokens": null,
+       "text_tokens": null,
+       "image_tokens": 0
+      },
+      "prompt_tokens_details": {
+       "audio_tokens": 0,
+       "cache_write_tokens": 0,
+       "cached_tokens": 0,
+       "image_tokens": null,
+       "text_tokens": null,
+       "video_tokens": 0
+      },
+      "server_tool_use": null,
+      "cost_rub": 0.01250712,
+      "cost": 0.01250712,
+      "plugins": null
+     },
+     "model_provider": "openai",
+     "model_name": "deepseek/deepseek-v4.1-flash",
+     "system_fingerprint": null,
+     "id": "gen_2226281133925601281",
+     "finish_reason": "tool_calls",
+     "logprobs": null
+    },
+    "type": "ai",
+    "name": null,
+    "id": "lc_run--01a17c8a-10fe-76d1-8f2f-92b5a29e1334-0",
+    "tool_calls": [
+     {
+      "name": "spec_course_enroll",
+      "args": {
+       "course_id": "sc-03",
+       "student": "Sasha"
+      },
+      "id": "chatcmpl-tool-896cc76a7e171cbc",
+      "type": "tool_call"
+     }
+    ],
+    "invalid_tool_calls": [],
+    "usage_metadata": {
+     "input_tokens": 1140,
+     "output_tokens": 61,
+     "total_tokens": 1201,
+     "input_token_details": {
+      "audio": 0,
+      "cache_read": 0,
+      "cache_creation": 0
+     },
+     "output_token_details": {
+      "audio": 0,
+      "reasoning": 0
+     }
+    }
+   },
+   {
+    "content": "Enrolled Sasha in Computer Vision. 19 seats left.",
+    "additional_kwargs": {},
+    "response_metadata": {},
+    "type": "tool",
+    "name": "spec_course_enroll",
+    "id": "947739f6-daf9-4e7c-9791-58400e881563",
+    "tool_call_id": "chatcmpl-tool-896cc76a7e171cbc",
+    "artifact": null,
+    "status": "success"
+   },
+   {
+    "content": "Enrolled you in **Computer Vision** (Monday 14:00, Room 301). 19 seats left.\n\nYou're now signed up for both AI courses:\n- LLM Agents — Friday 16:30, Room 412\n- Computer Vision — Monday 14:00, Room 301",
+    "additional_kwargs": {
+     "refusal": null
+    },
+    "response_metadata": {
+     "token_usage": {
+      "completion_tokens": 63,
+      "prompt_tokens": 1224,
+      "total_tokens": 1287,
+      "completion_tokens_details": {
+       "accepted_prediction_tokens": null,
+       "audio_tokens": 0,
+       "reasoning_tokens": 0,
+       "rejected_prediction_tokens": null,
+       "text_tokens": null,
+       "image_tokens": 0
+      },
+      "prompt_tokens_details": {
+       "audio_tokens": 0,
+       "cache_write_tokens": 0,
+       "cached_tokens": 0,
+       "image_tokens": null,
+       "text_tokens": null,
+       "video_tokens": 0
+      },
+      "server_tool_use": null,
+      "cost_rub": 0.01328725,
+      "cost": 0.01328725,
+      "plugins": null
+     },
+     "model_provider": "openai",
+     "model_name": "deepseek/deepseek-v4.1-flash",
+     "system_fingerprint": null,
+     "id": "gen_2226281141378355201",
+     "finish_reason": "stop",
+     "logprobs": null
+    },
+    "type": "ai",
+    "name": null,
+    "id": "lc_run--01a17c8a-17f2-71e3-b74f-0e48a8283115-0",
+    "tool_calls": [],
+    "invalid_tool_calls": [],
+    "usage_metadata": {
+     "input_tokens": 1224,
+     "output_tokens": 63,
+     "total_tokens": 1287,
+     "input_token_details": {
+      "audio": 0,
+      "cache_read": 0,
+      "cache_creation": 0
+     },
+     "output_token_details": {
+      "audio": 0,
+      "reasoning": 0
+     }
+    }
+   }
+  ],
+  "summary": "**Summary**\n\nSasha is a second-year master's student in applied math, studying at the CS faculty.\n\nCourses discussed:\n- **sc-02 — LLM Agents**: Friday 16:30, Room 412, teacher I. Smirnov\n- **sc-03 — Computer Vision**: Monday 14:00, Room 301, teacher E. Volkova\n\nEnrollments made:\n- Sasha enrolled in **LLM Agents** (sc-02) — 24 seats left afterward\n- Sasha enrolled in **Computer Vision** (sc-03) — 19 seats left afterward\n\nDecisions: Sasha chose to enroll in both AI-related courses.\n\nOpen questions: None — all requests were resolved."
+ },
+ "metadata": {
+  "ls_integration": "langchain_create_agent",
+  "thread_id": "load-summary",
+  "resourceAttributes": {
+   "telemetry.sdk.language": "python",
+   "telemetry.sdk.name": "opentelemetry",
+   "telemetry.sdk.version": "1.45.0",
+   "service.instance.id": "b2ed86c1-12ab-4bc1-8cf7-dbf135299d15",
+   "service.name": "unknown_service:python3"
+  },
+  "scope": {
+   "name": "langfuse-sdk",
+   "version": "4.16.0",
+   "attributes": {
+    "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+   }
+  },
+  "is_langchain_root": true
+ },
+ "createdAt": "9999-12-31T23:59:59.000Z",
+ "updatedAt": "9999-12-31T23:59:59.000Z",
+ "externalId": null,
+ "scores": [],
+ "latency": 0,
+ "observations": [
+  {
+   "id": "175f8edca0f84c45",
+   "traceId": "14a140b63a2db33e09369cea70324490",
+   "startTime": "9999-12-31T23:59:59.000Z",
+   "endTime": "9999-12-31T23:59:59.000Z",
+   "projectId": "assistant",
+   "parentObservationId": null,
+   "type": "CHAIN",
+   "environment": "default",
+   "name": "LangGraph",
+   "level": "DEFAULT",
+   "statusMessage": null,
+   "version": null,
+   "createdAt": "9999-12-31T23:59:59.000Z",
+   "updatedAt": "9999-12-31T23:59:59.000Z",
+   "input": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "Fine, enroll me there as well."
+     }
+    ]
+   },
+   "output": {
+    "messages": [
+     {
+      "content": "Fine, enroll me there as well.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "400792b2-203e-43f8-b032-ed0d783ec9df"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 61,
+        "prompt_tokens": 1140,
+        "total_tokens": 1201,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 0,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.01250712,
+        "cost": 0.01250712,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281133925601281",
+       "finish_reason": "tool_calls",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c8a-10fe-76d1-8f2f-92b5a29e1334-0",
+      "tool_calls": [
+       {
+        "name": "spec_course_enroll",
+        "args": {
+         "course_id": "sc-03",
+         "student": "Sasha"
+        },
+        "id": "chatcmpl-tool-896cc76a7e171cbc",
+        "type": "tool_call"
+       }
+      ],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 1140,
+       "output_tokens": 61,
+       "total_tokens": 1201,
+       "input_token_details": {
+        "audio": 0,
+        "cache_read": 0,
+        "cache_creation": 0
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Enrolled Sasha in Computer Vision. 19 seats left.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "tool",
+      "name": "spec_course_enroll",
+      "id": "947739f6-daf9-4e7c-9791-58400e881563",
+      "tool_call_id": "chatcmpl-tool-896cc76a7e171cbc",
+      "artifact": null,
+      "status": "success"
+     },
+     {
+      "content": "Enrolled you in **Computer Vision** (Monday 14:00, Room 301). 19 seats left.\n\nYou're now signed up for both AI courses:\n- LLM Agents — Friday 16:30, Room 412\n- Computer Vision — Monday 14:00, Room 301",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 63,
+        "prompt_tokens": 1224,
+        "total_tokens": 1287,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 0,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.01328725,
+        "cost": 0.01328725,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281141378355201",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c8a-17f2-71e3-b74f-0e48a8283115-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 1224,
+       "output_tokens": 63,
+       "total_tokens": 1287,
+       "input_token_details": {
+        "audio": 0,
+        "cache_read": 0,
+        "cache_creation": 0
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     }
+    ],
+    "summary": "**Summary**\n\nSasha is a second-year master's student in applied math, studying at the CS faculty.\n\nCourses discussed:\n- **sc-02 — LLM Agents**: Friday 16:30, Room 412, teacher I. Smirnov\n- **sc-03 — Computer Vision**: Monday 14:00, Room 301, teacher E. Volkova\n\nEnrollments made:\n- Sasha enrolled in **LLM Agents** (sc-02) — 24 seats left afterward\n- Sasha enrolled in **Computer Vision** (sc-03) — 19 seats left afterward\n\nDecisions: Sasha chose to enroll in both AI-related courses.\n\nOpen questions: None — all requests were resolved."
+   },
+   "metadata": {
+    "ls_integration": "langchain_create_agent",
+    "thread_id": "load-summary",
+    "is_langchain_root": true,
+    "resourceAttributes": {
+     "telemetry.sdk.language": "python",
+     "telemetry.sdk.name": "opentelemetry",
+     "telemetry.sdk.version": "1.45.0",
+     "service.instance.id": "b2ed86c1-12ab-4bc1-8cf7-dbf135299d15",
+     "service.name": "unknown_service:python3"
+    },
+    "scope": {
+     "name": "langfuse-sdk",
+     "version": "4.16.0",
+     "attributes": {
+      "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+     }
+    }
+   },
+   "model": null,
+   "modelParameters": {},
+   "completionStartTime": null,
+   "promptId": null,
+   "promptName": null,
+   "promptVersion": null,
+   "latency": 0,
+   "timeToFirstToken": null,
+   "usageDetails": {},
+   "costDetails": {},
+   "usagePricingTierId": null,
+   "usagePricingTierName": null,
+   "inputPrice": 0,
+   "outputPrice": 0,
+   "totalPrice": 0,
+   "calculatedInputCost": null,
+   "calculatedOutputCost": null,
+   "calculatedTotalCost": 0,
+   "unit": "TOKENS",
+   "promptTokens": 0,
+   "completionTokens": 0,
+   "totalTokens": 0,
+   "modelId": null,
+   "usage": {
+    "unit": "TOKENS",
+    "input": 0,
+    "output": 0,
+    "total": 0
+   }
+  },
+  {
+   "id": "abb0b554e5f60436",
+   "traceId": "14a140b63a2db33e09369cea70324490",
+   "startTime": "9999-12-31T23:59:59.000Z",
+   "endTime": "9999-12-31T23:59:59.000Z",
+   "projectId": "assistant",
+   "parentObservationId": "175f8edca0f84c45",
+   "type": "CHAIN",
+   "environment": "default",
+   "name": "model",
+   "level": "DEFAULT",
+   "statusMessage": null,
+   "version": null,
+   "createdAt": "9999-12-31T23:59:59.000Z",
+   "updatedAt": "9999-12-31T23:59:59.000Z",
+   "input": {
+    "messages": [
+     {
+      "content": "Hi! I'm Sasha, second-year master's student in applied math, I study at the CS faculty. What courses are about AI?",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "3aa7db7f-96db-4267-83d2-3236ef9538de"
+     },
+     {
+      "content": "I'll look up AI-related courses for you.\n\n",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 50,
+        "prompt_tokens": 542,
+        "total_tokens": 592,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 512,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00424358,
+        "cost": 0.00424358,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281079559032833",
+       "finish_reason": "tool_calls",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-de43-7d23-a61f-66db02e075b3-0",
+      "tool_calls": [
+       {
+        "name": "spec_course_find",
+        "args": {
+         "query": "ai"
+        },
+        "id": "call-22a8bd5f-2798-4f4e-b468-1dbe77893c24",
+        "type": "tool_call"
+       }
+      ],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 542,
+       "output_tokens": 50,
+       "total_tokens": 592,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 512
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "sc-02: LLM Agents; sc-03: Computer Vision",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "tool",
+      "name": "spec_course_find",
+      "id": "d00da3bf-9e4a-45ec-86aa-2cda855902c9",
+      "tool_call_id": "call-22a8bd5f-2798-4f4e-b468-1dbe77893c24",
+      "artifact": null,
+      "status": "success"
+     },
+     {
+      "content": "\n\n",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 76,
+        "prompt_tokens": 629,
+        "total_tokens": 705,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 512,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00890802,
+        "cost": 0.00890802,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281083724369921",
+       "finish_reason": "tool_calls",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-e232-70e1-9551-2ade6472001c-0",
+      "tool_calls": [
+       {
+        "name": "spec_course_info",
+        "args": {
+         "course_id": "sc-02"
+        },
+        "id": "call_de243c2e65ee4819832568527a7604e1",
+        "type": "tool_call"
+       },
+       {
+        "name": "spec_course_info",
+        "args": {
+         "course_id": "sc-03"
+        },
+        "id": "call_c9ef0a0b758c42bdbf0bdab7e98738cd",
+        "type": "tool_call"
+       }
+      ],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 629,
+       "output_tokens": 76,
+       "total_tokens": 705,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 512
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "LLM Agents: Friday 16:30, Room 412, teacher I. Smirnov, 25 seats free.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "tool",
+      "name": "spec_course_info",
+      "id": "bdfb40f3-d7ef-4df9-836c-919ebab74fb9",
+      "tool_call_id": "call_de243c2e65ee4819832568527a7604e1",
+      "artifact": null,
+      "status": "success"
+     },
+     {
+      "content": "Computer Vision: Monday 14:00, Room 301, teacher E. Volkova, 20 seats free.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "tool",
+      "name": "spec_course_info",
+      "id": "1c5c24cb-8339-4e13-8600-6c2e6e696a81",
+      "tool_call_id": "call_c9ef0a0b758c42bdbf0bdab7e98738cd",
+      "artifact": null,
+      "status": "success"
+     },
+     {
+      "content": "Two AI courses are available:\n\n**LLM Agents** (sc-02) — Friday 16:30, Room 412, teacher I. Smirnov · 25 seats free\n**Computer Vision** (sc-03) — Monday 14:00, Room 301, teacher E. Volkova · 20 seats free\n\nWant me to enroll you in either one, Sasha?",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 83,
+        "prompt_tokens": 760,
+        "total_tokens": 843,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 0,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.01073821,
+        "cost": 0.01073821,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281090988642305",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-e8b8-7a33-ba1d-a9d72abe3444-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 760,
+       "output_tokens": 83,
+       "total_tokens": 843,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 0
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "When does the LLM Agents course meet and where?",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "22c1b5df-443b-4753-8b64-a35b2229864d"
+     },
+     {
+      "content": "**LLM Agents** (sc-02) meets **Friday at 16:30 in Room 412**, taught by I. Smirnov.",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 32,
+        "prompt_tokens": 857,
+        "total_tokens": 889,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 512,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00756029,
+        "cost": 0.00756029,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281098927935489",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-ee05-7d82-9c38-4cab2d518b2c-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 857,
+       "output_tokens": 32,
+       "total_tokens": 889,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 512
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Enroll me in LLM Agents, please.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "af5ebb4b-96a0-4d94-aee1-aac5955ed25b"
+     },
+     {
+      "content": "\n\n",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 61,
+        "prompt_tokens": 914,
+        "total_tokens": 975,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 512,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.01399347,
+        "cost": 0.01399347,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281103155924993",
+       "finish_reason": "tool_calls",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-f442-7f23-80de-f633948f7b31-0",
+      "tool_calls": [
+       {
+        "name": "spec_course_enroll",
+        "args": {
+         "course_id": "sc-02",
+         "student": "Sasha"
+        },
+        "id": "call_6b8d7d4a8a5b46918db86f7ac0c0e838",
+        "type": "tool_call"
+       }
+      ],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 914,
+       "output_tokens": 61,
+       "total_tokens": 975,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 512
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Enrolled Sasha in LLM Agents. 24 seats left.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "tool",
+      "name": "spec_course_enroll",
+      "id": "b9a74dfa-832a-48f6-9665-3926b28f14f6",
+      "tool_call_id": "call_6b8d7d4a8a5b46918db86f7ac0c0e838",
+      "artifact": null,
+      "status": "success"
+     },
+     {
+      "content": "Done — you're enrolled in **LLM Agents** (Friday 16:30, Room 412). 24 seats remain.",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 28,
+        "prompt_tokens": 999,
+        "total_tokens": 1027,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 896,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00555757,
+        "cost": 0.00555757,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281110340505601",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-fabb-7071-a015-59c841d34d27-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 999,
+       "output_tokens": 28,
+       "total_tokens": 1027,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 896
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Is there anything about computer vision?",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "7a300ae5-5bdf-4a81-aae4-1f71e3d59a80"
+     },
+     {
+      "content": "Yes — **Computer Vision** (sc-03) runs **Monday at 14:00 in Room 301**, taught by E. Volkova, with 20 seats free.\n\nWant me to enroll you in that one too?",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 48,
+        "prompt_tokens": 1025,
+        "total_tokens": 1073,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 0,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.01085727,
+        "cost": 0.01085727,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281116145946625",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c8a-005d-7b20-978e-cb11559dfc2d-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 1025,
+       "output_tokens": 48,
+       "total_tokens": 1073,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 0
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Who teaches the Computer Vision course?",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "34c4478a-7002-4268-82e5-f668a796e5f5"
+     },
+     {
+      "content": "**Computer Vision** (sc-03) is taught by **E. Volkova**.",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 19,
+        "prompt_tokens": 1083,
+        "total_tokens": 1102,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 768,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00621795,
+        "cost": 0.00621795,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281122651049985",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c8a-063f-72d1-8be2-31dc15c2bc78-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 1083,
+       "output_tokens": 19,
+       "total_tokens": 1102,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 768
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "How many seats are free in Computer Vision?",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "e6813209-86de-496e-8834-fe3244b2618d"
+     },
+     {
+      "content": "**20 seats** are free in Computer Vision (sc-03).",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 15,
+        "prompt_tokens": 1114,
+        "total_tokens": 1129,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 1024,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00266448,
+        "cost": 0.00266448,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281129731690497",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c8a-0d16-7940-b62b-ad9f8bf672e3-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 1114,
+       "output_tokens": 15,
+       "total_tokens": 1129,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 1024
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Fine, enroll me there as well.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "400792b2-203e-43f8-b032-ed0d783ec9df"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 61,
+        "prompt_tokens": 1140,
+        "total_tokens": 1201,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 0,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.01250712,
+        "cost": 0.01250712,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281133925601281",
+       "finish_reason": "tool_calls",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c8a-10fe-76d1-8f2f-92b5a29e1334-0",
+      "tool_calls": [
+       {
+        "name": "spec_course_enroll",
+        "args": {
+         "course_id": "sc-03",
+         "student": "Sasha"
+        },
+        "id": "chatcmpl-tool-896cc76a7e171cbc",
+        "type": "tool_call"
+       }
+      ],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 1140,
+       "output_tokens": 61,
+       "total_tokens": 1201,
+       "input_token_details": {
+        "audio": 0,
+        "cache_read": 0,
+        "cache_creation": 0
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Enrolled Sasha in Computer Vision. 19 seats left.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "tool",
+      "name": "spec_course_enroll",
+      "id": "947739f6-daf9-4e7c-9791-58400e881563",
+      "tool_call_id": "chatcmpl-tool-896cc76a7e171cbc",
+      "artifact": null,
+      "status": "success"
+     }
+    ]
+   },
+   "output": [
+    {
+     "graph": null,
+     "update": {
+      "messages": [
+       {
+        "content": "Enrolled you in **Computer Vision** (Monday 14:00, Room 301). 19 seats left.\n\nYou're now signed up for both AI courses:\n- LLM Agents — Friday 16:30, Room 412\n- Computer Vision — Monday 14:00, Room 301",
+        "additional_kwargs": {
+         "refusal": null
+        },
+        "response_metadata": {
+         "token_usage": {
+          "completion_tokens": 63,
+          "prompt_tokens": 1224,
+          "total_tokens": 1287,
+          "completion_tokens_details": {
+           "accepted_prediction_tokens": null,
+           "audio_tokens": 0,
+           "reasoning_tokens": 0,
+           "rejected_prediction_tokens": null,
+           "text_tokens": null,
+           "image_tokens": 0
+          },
+          "prompt_tokens_details": {
+           "audio_tokens": 0,
+           "cache_write_tokens": 0,
+           "cached_tokens": 0,
+           "image_tokens": null,
+           "text_tokens": null,
+           "video_tokens": 0
+          },
+          "server_tool_use": null,
+          "cost_rub": 0.01328725,
+          "cost": 0.01328725,
+          "plugins": null
+         },
+         "model_provider": "openai",
+         "model_name": "deepseek/deepseek-v4.1-flash",
+         "system_fingerprint": null,
+         "id": "gen_2226281141378355201",
+         "finish_reason": "stop",
+         "logprobs": null
+        },
+        "type": "ai",
+        "name": null,
+        "id": "lc_run--01a17c8a-17f2-71e3-b74f-0e48a8283115-0",
+        "tool_calls": [],
+        "invalid_tool_calls": [],
+        "usage_metadata": {
+         "input_tokens": 1224,
+         "output_tokens": 63,
+         "total_tokens": 1287,
+         "input_token_details": {
+          "audio": 0,
+          "cache_read": 0,
+          "cache_creation": 0
+         },
+         "output_token_details": {
+          "audio": 0,
+          "reasoning": 0
+         }
+        }
+       }
+      ]
+     },
+     "resume": null,
+     "goto": []
+    }
+   ],
+   "metadata": {
+    "tags": [
+     "graph:step:33"
+    ],
+    "ls_integration": "langchain_create_agent",
+    "thread_id": "load-summary",
+    "langgraph_step": 33,
+    "langgraph_node": "model",
+    "langgraph_triggers": [
+     "branch:to:model"
+    ],
+    "langgraph_path": [
+     "__pregel_pull",
+     "model"
+    ],
+    "langgraph_checkpoint_ns": "model:04631218-a82e-c216-7a43-bee2a99acae0",
+    "resourceAttributes": {
+     "telemetry.sdk.language": "python",
+     "telemetry.sdk.name": "opentelemetry",
+     "telemetry.sdk.version": "1.45.0",
+     "service.instance.id": "b2ed86c1-12ab-4bc1-8cf7-dbf135299d15",
+     "service.name": "unknown_service:python3"
+    },
+    "scope": {
+     "name": "langfuse-sdk",
+     "version": "4.16.0",
+     "attributes": {
+      "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+     }
+    }
+   },
+   "model": null,
+   "modelParameters": {},
+   "completionStartTime": null,
+   "promptId": null,
+   "promptName": null,
+   "promptVersion": null,
+   "latency": 0,
+   "timeToFirstToken": null,
+   "usageDetails": {},
+   "costDetails": {},
+   "usagePricingTierId": null,
+   "usagePricingTierName": null,
+   "inputPrice": 0,
+   "outputPrice": 0,
+   "totalPrice": 0,
+   "calculatedInputCost": null,
+   "calculatedOutputCost": null,
+   "calculatedTotalCost": 0,
+   "unit": "TOKENS",
+   "promptTokens": 0,
+   "completionTokens": 0,
+   "totalTokens": 0,
+   "modelId": null,
+   "usage": {
+    "unit": "TOKENS",
+    "input": 0,
+    "output": 0,
+    "total": 0
+   }
+  },
+  {
+   "id": "a558d6f673a298fc",
+   "traceId": "14a140b63a2db33e09369cea70324490",
+   "startTime": "9999-12-31T23:59:59.000Z",
+   "endTime": "9999-12-31T23:59:59.000Z",
+   "projectId": "assistant",
+   "parentObservationId": "abb0b554e5f60436",
+   "type": "GENERATION",
+   "environment": "default",
+   "name": "ChatOpenAI",
+   "level": "DEFAULT",
+   "statusMessage": null,
+   "version": null,
+   "createdAt": "9999-12-31T23:59:59.000Z",
+   "updatedAt": "9999-12-31T23:59:59.000Z",
+   "input": [
+    {
+     "role": "system",
+     "content": "You are the university special courses desk. Use the tools before answering; course ids come from spec_course_find. Answer briefly."
+    },
+    {
+     "role": "user",
+     "content": "Hi! I'm Sasha, second-year master's student in applied math, I study at the CS faculty. What courses are about AI?"
+    },
+    {
+     "role": "assistant",
+     "content": "I'll look up AI-related courses for you.\n\n",
+     "tool_calls": [
+      {
+       "name": "spec_course_find",
+       "args": {
+        "query": "ai"
+       },
+       "id": "call-22a8bd5f-2798-4f4e-b468-1dbe77893c24",
+       "type": "tool_call"
+      }
+     ],
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "tool",
+     "content": "sc-02: LLM Agents; sc-03: Computer Vision",
+     "tool_call_id": "call-22a8bd5f-2798-4f4e-b468-1dbe77893c24"
+    },
+    {
+     "role": "assistant",
+     "content": "\n\n",
+     "tool_calls": [
+      {
+       "name": "spec_course_info",
+       "args": {
+        "course_id": "sc-02"
+       },
+       "id": "call_de243c2e65ee4819832568527a7604e1",
+       "type": "tool_call"
+      },
+      {
+       "name": "spec_course_info",
+       "args": {
+        "course_id": "sc-03"
+       },
+       "id": "call_c9ef0a0b758c42bdbf0bdab7e98738cd",
+       "type": "tool_call"
+      }
+     ],
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "tool",
+     "content": "LLM Agents: Friday 16:30, Room 412, teacher I. Smirnov, 25 seats free.",
+     "tool_call_id": "call_de243c2e65ee4819832568527a7604e1"
+    },
+    {
+     "role": "tool",
+     "content": "Computer Vision: Monday 14:00, Room 301, teacher E. Volkova, 20 seats free.",
+     "tool_call_id": "call_c9ef0a0b758c42bdbf0bdab7e98738cd"
+    },
+    {
+     "role": "assistant",
+     "content": "Two AI courses are available:\n\n**LLM Agents** (sc-02) — Friday 16:30, Room 412, teacher I. Smirnov · 25 seats free\n**Computer Vision** (sc-03) — Monday 14:00, Room 301, teacher E. Volkova · 20 seats free\n\nWant me to enroll you in either one, Sasha?",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "When does the LLM Agents course meet and where?"
+    },
+    {
+     "role": "assistant",
+     "content": "**LLM Agents** (sc-02) meets **Friday at 16:30 in Room 412**, taught by I. Smirnov.",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "Enroll me in LLM Agents, please."
+    },
+    {
+     "role": "assistant",
+     "content": "\n\n",
+     "tool_calls": [
+      {
+       "name": "spec_course_enroll",
+       "args": {
+        "course_id": "sc-02",
+        "student": "Sasha"
+       },
+       "id": "call_6b8d7d4a8a5b46918db86f7ac0c0e838",
+       "type": "tool_call"
+      }
+     ],
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "tool",
+     "content": "Enrolled Sasha in LLM Agents. 24 seats left.",
+     "tool_call_id": "call_6b8d7d4a8a5b46918db86f7ac0c0e838"
+    },
+    {
+     "role": "assistant",
+     "content": "Done — you're enrolled in **LLM Agents** (Friday 16:30, Room 412). 24 seats remain.",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "Is there anything about computer vision?"
+    },
+    {
+     "role": "assistant",
+     "content": "Yes — **Computer Vision** (sc-03) runs **Monday at 14:00 in Room 301**, taught by E. Volkova, with 20 seats free.\n\nWant me to enroll you in that one too?",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "Who teaches the Computer Vision course?"
+    },
+    {
+     "role": "assistant",
+     "content": "**Computer Vision** (sc-03) is taught by **E. Volkova**.",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "How many seats are free in Computer Vision?"
+    },
+    {
+     "role": "assistant",
+     "content": "**20 seats** are free in Computer Vision (sc-03).",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "Fine, enroll me there as well."
+    },
+    {
+     "role": "assistant",
+     "content": "",
+     "tool_calls": [
+      {
+       "name": "spec_course_enroll",
+       "args": {
+        "course_id": "sc-03",
+        "student": "Sasha"
+       },
+       "id": "chatcmpl-tool-896cc76a7e171cbc",
+       "type": "tool_call"
+      }
+     ],
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "tool",
+     "content": "Enrolled Sasha in Computer Vision. 19 seats left.",
+     "tool_call_id": "chatcmpl-tool-896cc76a7e171cbc"
+    },
+    {
+     "role": "tool",
+     "content": {
+      "type": "function",
+      "function": {
+       "name": "spec_course_find",
+       "description": "Find university special courses by one word.",
+       "parameters": {
+        "properties": {
+         "query": {
+          "description": "A title word, a topic tag or a weekday, for example 'ai' or 'friday'. Returns course ids for spec_course_info and spec_course_enroll.",
+          "type": "string"
+         }
+        },
+        "required": [
+         "query"
+        ],
+        "type": "object"
+       }
+      }
+     }
+    },
+    {
+     "role": "tool",
+     "content": {
+      "type": "function",
+      "function": {
+       "name": "spec_course_info",
+       "description": "Show the schedule, room, teacher and free seats of one course.",
+       "parameters": {
+        "properties": {
+         "course_id": {
+          "description": "A course id from spec_course_find, for example 'sc-01'.",
+          "type": "string"
+         }
+        },
+        "required": [
+         "course_id"
+        ],
+        "type": "object"
+       }
+      }
+     }
+    },
+    {
+     "role": "tool",
+     "content": {
+      "type": "function",
+      "function": {
+       "name": "spec_course_enroll",
+       "description": "Enroll the named student in one course.",
+       "parameters": {
+        "properties": {
+         "course_id": {
+          "description": "A course id from spec_course_find, for example 'sc-02'.",
+          "type": "string"
+         },
+         "student": {
+          "description": "Name of the student to enroll.",
+          "type": "string"
+         }
+        },
+        "required": [
+         "course_id",
+         "student"
+        ],
+        "type": "object"
+       }
+      }
+     }
+    }
+   ],
+   "output": {
+    "role": "assistant",
+    "content": "Enrolled you in **Computer Vision** (Monday 14:00, Room 301). 19 seats left.\n\nYou're now signed up for both AI courses:\n- LLM Agents — Friday 16:30, Room 412\n- Computer Vision — Monday 14:00, Room 301",
+    "additional_kwargs": {
+     "refusal": null
+    }
+   },
+   "metadata": {
+    "tags": [
+     "seq:step:1"
+    ],
+    "ls_integration": "langchain_chat_model",
+    "thread_id": "load-summary",
+    "langgraph_step": 33,
+    "langgraph_node": "model",
+    "langgraph_triggers": [
+     "branch:to:model"
+    ],
+    "langgraph_path": [
+     "__pregel_pull",
+     "model"
+    ],
+    "langgraph_checkpoint_ns": "model:04631218-a82e-c216-7a43-bee2a99acae0",
+    "checkpoint_ns": "model:04631218-a82e-c216-7a43-bee2a99acae0",
+    "ls_provider": "openai",
+    "ls_model_name": "deepseek/deepseek-v4.1-flash@reasoning_effort=none",
+    "ls_model_type": "chat",
+    "lc_versions": {
+     "langchain-core": "1.6.6",
+     "langchain": "1.4.3",
+     "langchain-openai": "1.6.7"
+    },
+    "resourceAttributes": {
+     "telemetry.sdk.language": "python",
+     "telemetry.sdk.name": "opentelemetry",
+     "telemetry.sdk.version": "1.45.0",
+     "service.instance.id": "b2ed86c1-12ab-4bc1-8cf7-dbf135299d15",
+     "service.name": "unknown_service:python3"
+    },
+    "scope": {
+     "name": "langfuse-sdk",
+     "version": "4.16.0",
+     "attributes": {
+      "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+     }
+    }
+   },
+   "model": "deepseek/deepseek-v4.1-flash",
+   "modelParameters": {},
+   "completionStartTime": null,
+   "promptId": null,
+   "promptName": null,
+   "promptVersion": null,
+   "latency": 0,
+   "timeToFirstToken": null,
+   "usageDetails": {
+    "input": 1224,
+    "output": 63,
+    "total": 1287,
+    "input_audio": 0,
+    "input_cache_read": 0,
+    "input_cache_creation": 0,
+    "output_audio": 0,
+    "output_reasoning": 0
+   },
+   "costDetails": {},
+   "usagePricingTierId": null,
+   "usagePricingTierName": null,
+   "inputPrice": 0,
+   "outputPrice": 0,
+   "totalPrice": 0,
+   "calculatedInputCost": null,
+   "calculatedOutputCost": null,
+   "calculatedTotalCost": 0,
+   "unit": "TOKENS",
+   "promptTokens": 1224,
+   "completionTokens": 63,
+   "totalTokens": 1287,
+   "modelId": null,
+   "usage": {
+    "unit": "TOKENS",
+    "input": 1224,
+    "output": 63,
+    "total": 1287
+   }
+  },
+  {
+   "id": "112a60a80a7be755",
+   "traceId": "14a140b63a2db33e09369cea70324490",
+   "startTime": "9999-12-31T23:59:59.000Z",
+   "endTime": "9999-12-31T23:59:59.000Z",
+   "projectId": "assistant",
+   "parentObservationId": "175f8edca0f84c45",
+   "type": "AGENT",
+   "environment": "default",
+   "name": "summarize.after_agent",
+   "level": "DEFAULT",
+   "statusMessage": null,
+   "version": null,
+   "createdAt": "9999-12-31T23:59:59.000Z",
+   "updatedAt": "9999-12-31T23:59:59.000Z",
+   "input": {
+    "messages": [
+     {
+      "content": "Hi! I'm Sasha, second-year master's student in applied math, I study at the CS faculty. What courses are about AI?",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "3aa7db7f-96db-4267-83d2-3236ef9538de"
+     },
+     {
+      "content": "I'll look up AI-related courses for you.\n\n",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 50,
+        "prompt_tokens": 542,
+        "total_tokens": 592,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 512,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00424358,
+        "cost": 0.00424358,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281079559032833",
+       "finish_reason": "tool_calls",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-de43-7d23-a61f-66db02e075b3-0",
+      "tool_calls": [
+       {
+        "name": "spec_course_find",
+        "args": {
+         "query": "ai"
+        },
+        "id": "call-22a8bd5f-2798-4f4e-b468-1dbe77893c24",
+        "type": "tool_call"
+       }
+      ],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 542,
+       "output_tokens": 50,
+       "total_tokens": 592,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 512
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "sc-02: LLM Agents; sc-03: Computer Vision",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "tool",
+      "name": "spec_course_find",
+      "id": "d00da3bf-9e4a-45ec-86aa-2cda855902c9",
+      "tool_call_id": "call-22a8bd5f-2798-4f4e-b468-1dbe77893c24",
+      "artifact": null,
+      "status": "success"
+     },
+     {
+      "content": "\n\n",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 76,
+        "prompt_tokens": 629,
+        "total_tokens": 705,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 512,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00890802,
+        "cost": 0.00890802,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281083724369921",
+       "finish_reason": "tool_calls",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-e232-70e1-9551-2ade6472001c-0",
+      "tool_calls": [
+       {
+        "name": "spec_course_info",
+        "args": {
+         "course_id": "sc-02"
+        },
+        "id": "call_de243c2e65ee4819832568527a7604e1",
+        "type": "tool_call"
+       },
+       {
+        "name": "spec_course_info",
+        "args": {
+         "course_id": "sc-03"
+        },
+        "id": "call_c9ef0a0b758c42bdbf0bdab7e98738cd",
+        "type": "tool_call"
+       }
+      ],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 629,
+       "output_tokens": 76,
+       "total_tokens": 705,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 512
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "LLM Agents: Friday 16:30, Room 412, teacher I. Smirnov, 25 seats free.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "tool",
+      "name": "spec_course_info",
+      "id": "bdfb40f3-d7ef-4df9-836c-919ebab74fb9",
+      "tool_call_id": "call_de243c2e65ee4819832568527a7604e1",
+      "artifact": null,
+      "status": "success"
+     },
+     {
+      "content": "Computer Vision: Monday 14:00, Room 301, teacher E. Volkova, 20 seats free.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "tool",
+      "name": "spec_course_info",
+      "id": "1c5c24cb-8339-4e13-8600-6c2e6e696a81",
+      "tool_call_id": "call_c9ef0a0b758c42bdbf0bdab7e98738cd",
+      "artifact": null,
+      "status": "success"
+     },
+     {
+      "content": "Two AI courses are available:\n\n**LLM Agents** (sc-02) — Friday 16:30, Room 412, teacher I. Smirnov · 25 seats free\n**Computer Vision** (sc-03) — Monday 14:00, Room 301, teacher E. Volkova · 20 seats free\n\nWant me to enroll you in either one, Sasha?",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 83,
+        "prompt_tokens": 760,
+        "total_tokens": 843,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 0,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.01073821,
+        "cost": 0.01073821,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281090988642305",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-e8b8-7a33-ba1d-a9d72abe3444-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 760,
+       "output_tokens": 83,
+       "total_tokens": 843,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 0
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "When does the LLM Agents course meet and where?",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "22c1b5df-443b-4753-8b64-a35b2229864d"
+     },
+     {
+      "content": "**LLM Agents** (sc-02) meets **Friday at 16:30 in Room 412**, taught by I. Smirnov.",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 32,
+        "prompt_tokens": 857,
+        "total_tokens": 889,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 512,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00756029,
+        "cost": 0.00756029,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281098927935489",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-ee05-7d82-9c38-4cab2d518b2c-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 857,
+       "output_tokens": 32,
+       "total_tokens": 889,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 512
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Enroll me in LLM Agents, please.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "af5ebb4b-96a0-4d94-aee1-aac5955ed25b"
+     },
+     {
+      "content": "\n\n",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 61,
+        "prompt_tokens": 914,
+        "total_tokens": 975,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 512,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.01399347,
+        "cost": 0.01399347,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281103155924993",
+       "finish_reason": "tool_calls",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-f442-7f23-80de-f633948f7b31-0",
+      "tool_calls": [
+       {
+        "name": "spec_course_enroll",
+        "args": {
+         "course_id": "sc-02",
+         "student": "Sasha"
+        },
+        "id": "call_6b8d7d4a8a5b46918db86f7ac0c0e838",
+        "type": "tool_call"
+       }
+      ],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 914,
+       "output_tokens": 61,
+       "total_tokens": 975,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 512
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Enrolled Sasha in LLM Agents. 24 seats left.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "tool",
+      "name": "spec_course_enroll",
+      "id": "b9a74dfa-832a-48f6-9665-3926b28f14f6",
+      "tool_call_id": "call_6b8d7d4a8a5b46918db86f7ac0c0e838",
+      "artifact": null,
+      "status": "success"
+     },
+     {
+      "content": "Done — you're enrolled in **LLM Agents** (Friday 16:30, Room 412). 24 seats remain.",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 28,
+        "prompt_tokens": 999,
+        "total_tokens": 1027,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 896,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00555757,
+        "cost": 0.00555757,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281110340505601",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-fabb-7071-a015-59c841d34d27-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 999,
+       "output_tokens": 28,
+       "total_tokens": 1027,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 896
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Is there anything about computer vision?",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "7a300ae5-5bdf-4a81-aae4-1f71e3d59a80"
+     },
+     {
+      "content": "Yes — **Computer Vision** (sc-03) runs **Monday at 14:00 in Room 301**, taught by E. Volkova, with 20 seats free.\n\nWant me to enroll you in that one too?",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 48,
+        "prompt_tokens": 1025,
+        "total_tokens": 1073,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 0,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.01085727,
+        "cost": 0.01085727,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281116145946625",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c8a-005d-7b20-978e-cb11559dfc2d-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 1025,
+       "output_tokens": 48,
+       "total_tokens": 1073,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 0
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Who teaches the Computer Vision course?",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "34c4478a-7002-4268-82e5-f668a796e5f5"
+     },
+     {
+      "content": "**Computer Vision** (sc-03) is taught by **E. Volkova**.",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 19,
+        "prompt_tokens": 1083,
+        "total_tokens": 1102,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 768,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00621795,
+        "cost": 0.00621795,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281122651049985",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c8a-063f-72d1-8be2-31dc15c2bc78-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 1083,
+       "output_tokens": 19,
+       "total_tokens": 1102,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 768
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "How many seats are free in Computer Vision?",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "e6813209-86de-496e-8834-fe3244b2618d"
+     },
+     {
+      "content": "**20 seats** are free in Computer Vision (sc-03).",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 15,
+        "prompt_tokens": 1114,
+        "total_tokens": 1129,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 1024,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00266448,
+        "cost": 0.00266448,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281129731690497",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c8a-0d16-7940-b62b-ad9f8bf672e3-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 1114,
+       "output_tokens": 15,
+       "total_tokens": 1129,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 1024
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Fine, enroll me there as well.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "400792b2-203e-43f8-b032-ed0d783ec9df"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 61,
+        "prompt_tokens": 1140,
+        "total_tokens": 1201,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 0,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.01250712,
+        "cost": 0.01250712,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281133925601281",
+       "finish_reason": "tool_calls",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c8a-10fe-76d1-8f2f-92b5a29e1334-0",
+      "tool_calls": [
+       {
+        "name": "spec_course_enroll",
+        "args": {
+         "course_id": "sc-03",
+         "student": "Sasha"
+        },
+        "id": "chatcmpl-tool-896cc76a7e171cbc",
+        "type": "tool_call"
+       }
+      ],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 1140,
+       "output_tokens": 61,
+       "total_tokens": 1201,
+       "input_token_details": {
+        "audio": 0,
+        "cache_read": 0,
+        "cache_creation": 0
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Enrolled Sasha in Computer Vision. 19 seats left.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "tool",
+      "name": "spec_course_enroll",
+      "id": "947739f6-daf9-4e7c-9791-58400e881563",
+      "tool_call_id": "chatcmpl-tool-896cc76a7e171cbc",
+      "artifact": null,
+      "status": "success"
+     },
+     {
+      "content": "Enrolled you in **Computer Vision** (Monday 14:00, Room 301). 19 seats left.\n\nYou're now signed up for both AI courses:\n- LLM Agents — Friday 16:30, Room 412\n- Computer Vision — Monday 14:00, Room 301",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 63,
+        "prompt_tokens": 1224,
+        "total_tokens": 1287,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 0,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.01328725,
+        "cost": 0.01328725,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281141378355201",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c8a-17f2-71e3-b74f-0e48a8283115-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 1224,
+       "output_tokens": 63,
+       "total_tokens": 1287,
+       "input_token_details": {
+        "audio": 0,
+        "cache_read": 0,
+        "cache_creation": 0
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     }
+    ]
+   },
+   "output": {
+    "summary": "**Summary**\n\nSasha is a second-year master's student in applied math, studying at the CS faculty.\n\nCourses discussed:\n- **sc-02 — LLM Agents**: Friday 16:30, Room 412, teacher I. Smirnov\n- **sc-03 — Computer Vision**: Monday 14:00, Room 301, teacher E. Volkova\n\nEnrollments made:\n- Sasha enrolled in **LLM Agents** (sc-02) — 24 seats left afterward\n- Sasha enrolled in **Computer Vision** (sc-03) — 19 seats left afterward\n\nDecisions: Sasha chose to enroll in both AI-related courses.\n\nOpen questions: None — all requests were resolved.",
+    "messages": [
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "3aa7db7f-96db-4267-83d2-3236ef9538de"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "lc_run--01a17c89-de43-7d23-a61f-66db02e075b3-0"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "d00da3bf-9e4a-45ec-86aa-2cda855902c9"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "lc_run--01a17c89-e232-70e1-9551-2ade6472001c-0"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "bdfb40f3-d7ef-4df9-836c-919ebab74fb9"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "1c5c24cb-8339-4e13-8600-6c2e6e696a81"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "lc_run--01a17c89-e8b8-7a33-ba1d-a9d72abe3444-0"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "22c1b5df-443b-4753-8b64-a35b2229864d"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "lc_run--01a17c89-ee05-7d82-9c38-4cab2d518b2c-0"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "af5ebb4b-96a0-4d94-aee1-aac5955ed25b"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "lc_run--01a17c89-f442-7f23-80de-f633948f7b31-0"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "b9a74dfa-832a-48f6-9665-3926b28f14f6"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "lc_run--01a17c89-fabb-7071-a015-59c841d34d27-0"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "7a300ae5-5bdf-4a81-aae4-1f71e3d59a80"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "lc_run--01a17c8a-005d-7b20-978e-cb11559dfc2d-0"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "34c4478a-7002-4268-82e5-f668a796e5f5"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "lc_run--01a17c8a-063f-72d1-8be2-31dc15c2bc78-0"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "e6813209-86de-496e-8834-fe3244b2618d"
+     },
+     {
+      "content": "",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "remove",
+      "name": null,
+      "id": "lc_run--01a17c8a-0d16-7940-b62b-ad9f8bf672e3-0"
+     }
+    ]
+   },
+   "metadata": {
+    "tags": [
+     "graph:step:34"
+    ],
+    "ls_integration": "langchain_create_agent",
+    "thread_id": "load-summary",
+    "langgraph_step": 34,
+    "langgraph_node": "summarize.after_agent",
+    "langgraph_triggers": [
+     "branch:to:summarize.after_agent"
+    ],
+    "langgraph_path": [
+     "__pregel_pull",
+     "summarize.after_agent"
+    ],
+    "langgraph_checkpoint_ns": "summarize.after_agent:a8621b6e-2317-5bc4-1ae4-609a68159056",
+    "resourceAttributes": {
+     "telemetry.sdk.language": "python",
+     "telemetry.sdk.name": "opentelemetry",
+     "telemetry.sdk.version": "1.45.0",
+     "service.instance.id": "b2ed86c1-12ab-4bc1-8cf7-dbf135299d15",
+     "service.name": "unknown_service:python3"
+    },
+    "scope": {
+     "name": "langfuse-sdk",
+     "version": "4.16.0",
+     "attributes": {
+      "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+     }
+    }
+   },
+   "model": null,
+   "modelParameters": {},
+   "completionStartTime": null,
+   "promptId": null,
+   "promptName": null,
+   "promptVersion": null,
+   "latency": 0,
+   "timeToFirstToken": null,
+   "usageDetails": {},
+   "costDetails": {},
+   "usagePricingTierId": null,
+   "usagePricingTierName": null,
+   "inputPrice": 0,
+   "outputPrice": 0,
+   "totalPrice": 0,
+   "calculatedInputCost": null,
+   "calculatedOutputCost": null,
+   "calculatedTotalCost": 0,
+   "unit": "TOKENS",
+   "promptTokens": 0,
+   "completionTokens": 0,
+   "totalTokens": 0,
+   "modelId": null,
+   "usage": {
+    "unit": "TOKENS",
+    "input": 0,
+    "output": 0,
+    "total": 0
+   }
+  },
+  {
+   "id": "0990ef699eea7147",
+   "traceId": "14a140b63a2db33e09369cea70324490",
+   "startTime": "9999-12-31T23:59:59.000Z",
+   "endTime": "9999-12-31T23:59:59.000Z",
+   "projectId": "assistant",
+   "parentObservationId": "112a60a80a7be755",
+   "type": "GENERATION",
+   "environment": "default",
+   "name": "ChatOpenAI",
+   "level": "DEFAULT",
+   "statusMessage": null,
+   "version": null,
+   "createdAt": "9999-12-31T23:59:59.000Z",
+   "updatedAt": "9999-12-31T23:59:59.000Z",
+   "input": [
+    {
+     "role": "user",
+     "content": "Hi! I'm Sasha, second-year master's student in applied math, I study at the CS faculty. What courses are about AI?"
+    },
+    {
+     "role": "assistant",
+     "content": "I'll look up AI-related courses for you.\n\n",
+     "tool_calls": [
+      {
+       "name": "spec_course_find",
+       "args": {
+        "query": "ai"
+       },
+       "id": "call-22a8bd5f-2798-4f4e-b468-1dbe77893c24",
+       "type": "tool_call"
+      }
+     ],
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "tool",
+     "content": "sc-02: LLM Agents; sc-03: Computer Vision",
+     "tool_call_id": "call-22a8bd5f-2798-4f4e-b468-1dbe77893c24"
+    },
+    {
+     "role": "assistant",
+     "content": "\n\n",
+     "tool_calls": [
+      {
+       "name": "spec_course_info",
+       "args": {
+        "course_id": "sc-02"
+       },
+       "id": "call_de243c2e65ee4819832568527a7604e1",
+       "type": "tool_call"
+      },
+      {
+       "name": "spec_course_info",
+       "args": {
+        "course_id": "sc-03"
+       },
+       "id": "call_c9ef0a0b758c42bdbf0bdab7e98738cd",
+       "type": "tool_call"
+      }
+     ],
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "tool",
+     "content": "LLM Agents: Friday 16:30, Room 412, teacher I. Smirnov, 25 seats free.",
+     "tool_call_id": "call_de243c2e65ee4819832568527a7604e1"
+    },
+    {
+     "role": "tool",
+     "content": "Computer Vision: Monday 14:00, Room 301, teacher E. Volkova, 20 seats free.",
+     "tool_call_id": "call_c9ef0a0b758c42bdbf0bdab7e98738cd"
+    },
+    {
+     "role": "assistant",
+     "content": "Two AI courses are available:\n\n**LLM Agents** (sc-02) — Friday 16:30, Room 412, teacher I. Smirnov · 25 seats free\n**Computer Vision** (sc-03) — Monday 14:00, Room 301, teacher E. Volkova · 20 seats free\n\nWant me to enroll you in either one, Sasha?",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "When does the LLM Agents course meet and where?"
+    },
+    {
+     "role": "assistant",
+     "content": "**LLM Agents** (sc-02) meets **Friday at 16:30 in Room 412**, taught by I. Smirnov.",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "Enroll me in LLM Agents, please."
+    },
+    {
+     "role": "assistant",
+     "content": "\n\n",
+     "tool_calls": [
+      {
+       "name": "spec_course_enroll",
+       "args": {
+        "course_id": "sc-02",
+        "student": "Sasha"
+       },
+       "id": "call_6b8d7d4a8a5b46918db86f7ac0c0e838",
+       "type": "tool_call"
+      }
+     ],
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "tool",
+     "content": "Enrolled Sasha in LLM Agents. 24 seats left.",
+     "tool_call_id": "call_6b8d7d4a8a5b46918db86f7ac0c0e838"
+    },
+    {
+     "role": "assistant",
+     "content": "Done — you're enrolled in **LLM Agents** (Friday 16:30, Room 412). 24 seats remain.",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "Is there anything about computer vision?"
+    },
+    {
+     "role": "assistant",
+     "content": "Yes — **Computer Vision** (sc-03) runs **Monday at 14:00 in Room 301**, taught by E. Volkova, with 20 seats free.\n\nWant me to enroll you in that one too?",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "Who teaches the Computer Vision course?"
+    },
+    {
+     "role": "assistant",
+     "content": "**Computer Vision** (sc-03) is taught by **E. Volkova**.",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "How many seats are free in Computer Vision?"
+    },
+    {
+     "role": "assistant",
+     "content": "**20 seats** are free in Computer Vision (sc-03).",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "Fine, enroll me there as well."
+    },
+    {
+     "role": "assistant",
+     "content": "",
+     "tool_calls": [
+      {
+       "name": "spec_course_enroll",
+       "args": {
+        "course_id": "sc-03",
+        "student": "Sasha"
+       },
+       "id": "chatcmpl-tool-896cc76a7e171cbc",
+       "type": "tool_call"
+      }
+     ],
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "tool",
+     "content": "Enrolled Sasha in Computer Vision. 19 seats left.",
+     "tool_call_id": "chatcmpl-tool-896cc76a7e171cbc"
+    },
+    {
+     "role": "assistant",
+     "content": "Enrolled you in **Computer Vision** (Monday 14:00, Room 301). 19 seats left.\n\nYou're now signed up for both AI courses:\n- LLM Agents — Friday 16:30, Room 412\n- Computer Vision — Monday 14:00, Room 301",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "Fold the dialogue above into a short summary: the student's name and personal facts, course ids and titles, enrollments made, decisions, open questions."
+    }
+   ],
+   "output": {
+    "role": "assistant",
+    "content": "**Summary**\n\nSasha is a second-year master's student in applied math, studying at the CS faculty.\n\nCourses discussed:\n- **sc-02 — LLM Agents**: Friday 16:30, Room 412, teacher I. Smirnov\n- **sc-03 — Computer Vision**: Monday 14:00, Room 301, teacher E. Volkova\n\nEnrollments made:\n- Sasha enrolled in **LLM Agents** (sc-02) — 24 seats left afterward\n- Sasha enrolled in **Computer Vision** (sc-03) — 19 seats left afterward\n\nDecisions: Sasha chose to enroll in both AI-related courses.\n\nOpen questions: None — all requests were resolved.",
+    "additional_kwargs": {
+     "refusal": null
+    }
+   },
+   "metadata": {
+    "tags": [
+     "seq:step:1"
+    ],
+    "ls_integration": "langchain_chat_model",
+    "thread_id": "load-summary",
+    "langgraph_step": 34,
+    "langgraph_node": "summarize.after_agent",
+    "langgraph_triggers": [
+     "branch:to:summarize.after_agent"
+    ],
+    "langgraph_path": [
+     "__pregel_pull",
+     "summarize.after_agent"
+    ],
+    "langgraph_checkpoint_ns": "summarize.after_agent:a8621b6e-2317-5bc4-1ae4-609a68159056",
+    "checkpoint_ns": "summarize.after_agent:a8621b6e-2317-5bc4-1ae4-609a68159056",
+    "ls_provider": "openai",
+    "ls_model_name": "deepseek/deepseek-v4.1-flash@reasoning_effort=none",
+    "ls_model_type": "chat",
+    "lc_versions": {
+     "langchain-core": "1.6.6",
+     "langchain": "1.4.3",
+     "langchain-openai": "1.6.7"
+    },
+    "resourceAttributes": {
+     "telemetry.sdk.language": "python",
+     "telemetry.sdk.name": "opentelemetry",
+     "telemetry.sdk.version": "1.45.0",
+     "service.instance.id": "b2ed86c1-12ab-4bc1-8cf7-dbf135299d15",
+     "service.name": "unknown_service:python3"
+    },
+    "scope": {
+     "name": "langfuse-sdk",
+     "version": "4.16.0",
+     "attributes": {
+      "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+     }
+    }
+   },
+   "model": "deepseek/deepseek-v4.1-flash",
+   "modelParameters": {},
+   "completionStartTime": null,
+   "promptId": null,
+   "promptName": null,
+   "promptVersion": null,
+   "latency": 0,
+   "timeToFirstToken": null,
+   "usageDetails": {
+    "input": 812,
+    "output": 150,
+    "total": 962,
+    "input_audio": 0,
+    "input_cache_read": 0,
+    "input_cache_creation": 0,
+    "output_audio": 0,
+    "output_reasoning": 0
+   },
+   "costDetails": {},
+   "usagePricingTierId": null,
+   "usagePricingTierName": null,
+   "inputPrice": 0,
+   "outputPrice": 0,
+   "totalPrice": 0,
+   "calculatedInputCost": null,
+   "calculatedOutputCost": null,
+   "calculatedTotalCost": 0,
+   "unit": "TOKENS",
+   "promptTokens": 812,
+   "completionTokens": 150,
+   "totalTokens": 962,
+   "modelId": null,
+   "usage": {
+    "unit": "TOKENS",
+    "input": 812,
+    "output": 150,
+    "total": 962
+   }
+  },
+  {
+   "id": "859ac509b2644d00",
+   "traceId": "14a140b63a2db33e09369cea70324490",
+   "startTime": "9999-12-31T23:59:59.000Z",
+   "endTime": "9999-12-31T23:59:59.000Z",
+   "projectId": "assistant",
+   "parentObservationId": "175f8edca0f84c45",
+   "type": "CHAIN",
+   "environment": "default",
+   "name": "tools",
+   "level": "DEFAULT",
+   "statusMessage": null,
+   "version": null,
+   "createdAt": "9999-12-31T23:59:59.000Z",
+   "updatedAt": "9999-12-31T23:59:59.000Z",
+   "input": [
+    {
+     "name": "spec_course_enroll",
+     "args": {
+      "course_id": "sc-03",
+      "student": "Sasha"
+     },
+     "id": "chatcmpl-tool-896cc76a7e171cbc",
+     "type": "tool_call"
+    }
+   ],
+   "output": {
+    "messages": [
+     {
+      "content": "Enrolled Sasha in Computer Vision. 19 seats left.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "tool",
+      "name": "spec_course_enroll",
+      "id": "947739f6-daf9-4e7c-9791-58400e881563",
+      "tool_call_id": "chatcmpl-tool-896cc76a7e171cbc",
+      "artifact": null,
+      "status": "success"
+     }
+    ]
+   },
+   "metadata": {
+    "tags": [
+     "graph:step:32"
+    ],
+    "ls_integration": "langchain_create_agent",
+    "thread_id": "load-summary",
+    "langgraph_step": 32,
+    "langgraph_node": "tools",
+    "langgraph_triggers": [
+     "__pregel_push"
+    ],
+    "langgraph_path": [
+     "__pregel_push",
+     0,
+     false
+    ],
+    "langgraph_checkpoint_ns": "tools:eb360e9f-80d5-6050-57eb-45686c11a821",
+    "resourceAttributes": {
+     "telemetry.sdk.language": "python",
+     "telemetry.sdk.name": "opentelemetry",
+     "telemetry.sdk.version": "1.45.0",
+     "service.instance.id": "b2ed86c1-12ab-4bc1-8cf7-dbf135299d15",
+     "service.name": "unknown_service:python3"
+    },
+    "scope": {
+     "name": "langfuse-sdk",
+     "version": "4.16.0",
+     "attributes": {
+      "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+     }
+    }
+   },
+   "model": null,
+   "modelParameters": {},
+   "completionStartTime": null,
+   "promptId": null,
+   "promptName": null,
+   "promptVersion": null,
+   "latency": 0,
+   "timeToFirstToken": null,
+   "usageDetails": {},
+   "costDetails": {},
+   "usagePricingTierId": null,
+   "usagePricingTierName": null,
+   "inputPrice": 0,
+   "outputPrice": 0,
+   "totalPrice": 0,
+   "calculatedInputCost": null,
+   "calculatedOutputCost": null,
+   "calculatedTotalCost": 0,
+   "unit": "TOKENS",
+   "promptTokens": 0,
+   "completionTokens": 0,
+   "totalTokens": 0,
+   "modelId": null,
+   "usage": {
+    "unit": "TOKENS",
+    "input": 0,
+    "output": 0,
+    "total": 0
+   }
+  },
+  {
+   "id": "5622328615b26a4f",
+   "traceId": "14a140b63a2db33e09369cea70324490",
+   "startTime": "9999-12-31T23:59:59.000Z",
+   "endTime": "9999-12-31T23:59:59.000Z",
+   "projectId": "assistant",
+   "parentObservationId": "e2a12a680ec956b2",
+   "type": "GENERATION",
+   "environment": "default",
+   "name": "ChatOpenAI",
+   "level": "DEFAULT",
+   "statusMessage": null,
+   "version": null,
+   "createdAt": "9999-12-31T23:59:59.000Z",
+   "updatedAt": "9999-12-31T23:59:59.000Z",
+   "input": [
+    {
+     "role": "system",
+     "content": "You are the university special courses desk. Use the tools before answering; course ids come from spec_course_find. Answer briefly."
+    },
+    {
+     "role": "user",
+     "content": "Hi! I'm Sasha, second-year master's student in applied math, I study at the CS faculty. What courses are about AI?"
+    },
+    {
+     "role": "assistant",
+     "content": "I'll look up AI-related courses for you.\n\n",
+     "tool_calls": [
+      {
+       "name": "spec_course_find",
+       "args": {
+        "query": "ai"
+       },
+       "id": "call-22a8bd5f-2798-4f4e-b468-1dbe77893c24",
+       "type": "tool_call"
+      }
+     ],
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "tool",
+     "content": "sc-02: LLM Agents; sc-03: Computer Vision",
+     "tool_call_id": "call-22a8bd5f-2798-4f4e-b468-1dbe77893c24"
+    },
+    {
+     "role": "assistant",
+     "content": "\n\n",
+     "tool_calls": [
+      {
+       "name": "spec_course_info",
+       "args": {
+        "course_id": "sc-02"
+       },
+       "id": "call_de243c2e65ee4819832568527a7604e1",
+       "type": "tool_call"
+      },
+      {
+       "name": "spec_course_info",
+       "args": {
+        "course_id": "sc-03"
+       },
+       "id": "call_c9ef0a0b758c42bdbf0bdab7e98738cd",
+       "type": "tool_call"
+      }
+     ],
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "tool",
+     "content": "LLM Agents: Friday 16:30, Room 412, teacher I. Smirnov, 25 seats free.",
+     "tool_call_id": "call_de243c2e65ee4819832568527a7604e1"
+    },
+    {
+     "role": "tool",
+     "content": "Computer Vision: Monday 14:00, Room 301, teacher E. Volkova, 20 seats free.",
+     "tool_call_id": "call_c9ef0a0b758c42bdbf0bdab7e98738cd"
+    },
+    {
+     "role": "assistant",
+     "content": "Two AI courses are available:\n\n**LLM Agents** (sc-02) — Friday 16:30, Room 412, teacher I. Smirnov · 25 seats free\n**Computer Vision** (sc-03) — Monday 14:00, Room 301, teacher E. Volkova · 20 seats free\n\nWant me to enroll you in either one, Sasha?",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "When does the LLM Agents course meet and where?"
+    },
+    {
+     "role": "assistant",
+     "content": "**LLM Agents** (sc-02) meets **Friday at 16:30 in Room 412**, taught by I. Smirnov.",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "Enroll me in LLM Agents, please."
+    },
+    {
+     "role": "assistant",
+     "content": "\n\n",
+     "tool_calls": [
+      {
+       "name": "spec_course_enroll",
+       "args": {
+        "course_id": "sc-02",
+        "student": "Sasha"
+       },
+       "id": "call_6b8d7d4a8a5b46918db86f7ac0c0e838",
+       "type": "tool_call"
+      }
+     ],
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "tool",
+     "content": "Enrolled Sasha in LLM Agents. 24 seats left.",
+     "tool_call_id": "call_6b8d7d4a8a5b46918db86f7ac0c0e838"
+    },
+    {
+     "role": "assistant",
+     "content": "Done — you're enrolled in **LLM Agents** (Friday 16:30, Room 412). 24 seats remain.",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "Is there anything about computer vision?"
+    },
+    {
+     "role": "assistant",
+     "content": "Yes — **Computer Vision** (sc-03) runs **Monday at 14:00 in Room 301**, taught by E. Volkova, with 20 seats free.\n\nWant me to enroll you in that one too?",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "Who teaches the Computer Vision course?"
+    },
+    {
+     "role": "assistant",
+     "content": "**Computer Vision** (sc-03) is taught by **E. Volkova**.",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "How many seats are free in Computer Vision?"
+    },
+    {
+     "role": "assistant",
+     "content": "**20 seats** are free in Computer Vision (sc-03).",
+     "additional_kwargs": {
+      "refusal": null
+     }
+    },
+    {
+     "role": "user",
+     "content": "Fine, enroll me there as well."
+    },
+    {
+     "role": "tool",
+     "content": {
+      "type": "function",
+      "function": {
+       "name": "spec_course_find",
+       "description": "Find university special courses by one word.",
+       "parameters": {
+        "properties": {
+         "query": {
+          "description": "A title word, a topic tag or a weekday, for example 'ai' or 'friday'. Returns course ids for spec_course_info and spec_course_enroll.",
+          "type": "string"
+         }
+        },
+        "required": [
+         "query"
+        ],
+        "type": "object"
+       }
+      }
+     }
+    },
+    {
+     "role": "tool",
+     "content": {
+      "type": "function",
+      "function": {
+       "name": "spec_course_info",
+       "description": "Show the schedule, room, teacher and free seats of one course.",
+       "parameters": {
+        "properties": {
+         "course_id": {
+          "description": "A course id from spec_course_find, for example 'sc-01'.",
+          "type": "string"
+         }
+        },
+        "required": [
+         "course_id"
+        ],
+        "type": "object"
+       }
+      }
+     }
+    },
+    {
+     "role": "tool",
+     "content": {
+      "type": "function",
+      "function": {
+       "name": "spec_course_enroll",
+       "description": "Enroll the named student in one course.",
+       "parameters": {
+        "properties": {
+         "course_id": {
+          "description": "A course id from spec_course_find, for example 'sc-02'.",
+          "type": "string"
+         },
+         "student": {
+          "description": "Name of the student to enroll.",
+          "type": "string"
+         }
+        },
+        "required": [
+         "course_id",
+         "student"
+        ],
+        "type": "object"
+       }
+      }
+     }
+    }
+   ],
+   "output": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+     {
+      "name": "spec_course_enroll",
+      "args": {
+       "course_id": "sc-03",
+       "student": "Sasha"
+      },
+      "id": "chatcmpl-tool-896cc76a7e171cbc",
+      "type": "tool_call"
+     }
+    ],
+    "additional_kwargs": {
+     "refusal": null
+    }
+   },
+   "metadata": {
+    "tags": [
+     "seq:step:1"
+    ],
+    "ls_integration": "langchain_chat_model",
+    "thread_id": "load-summary",
+    "langgraph_step": 31,
+    "langgraph_node": "model",
+    "langgraph_triggers": [
+     "branch:to:model"
+    ],
+    "langgraph_path": [
+     "__pregel_pull",
+     "model"
+    ],
+    "langgraph_checkpoint_ns": "model:5f7daf98-e092-c53d-c673-8dfad7f6ba7f",
+    "checkpoint_ns": "model:5f7daf98-e092-c53d-c673-8dfad7f6ba7f",
+    "ls_provider": "openai",
+    "ls_model_name": "deepseek/deepseek-v4.1-flash@reasoning_effort=none",
+    "ls_model_type": "chat",
+    "lc_versions": {
+     "langchain-core": "1.6.6",
+     "langchain": "1.4.3",
+     "langchain-openai": "1.6.7"
+    },
+    "resourceAttributes": {
+     "telemetry.sdk.language": "python",
+     "telemetry.sdk.name": "opentelemetry",
+     "telemetry.sdk.version": "1.45.0",
+     "service.instance.id": "b2ed86c1-12ab-4bc1-8cf7-dbf135299d15",
+     "service.name": "unknown_service:python3"
+    },
+    "scope": {
+     "name": "langfuse-sdk",
+     "version": "4.16.0",
+     "attributes": {
+      "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+     }
+    }
+   },
+   "model": "deepseek/deepseek-v4.1-flash",
+   "modelParameters": {},
+   "completionStartTime": null,
+   "promptId": null,
+   "promptName": null,
+   "promptVersion": null,
+   "latency": 0,
+   "timeToFirstToken": null,
+   "usageDetails": {
+    "input": 1140,
+    "output": 61,
+    "total": 1201,
+    "input_audio": 0,
+    "input_cache_read": 0,
+    "input_cache_creation": 0,
+    "output_audio": 0,
+    "output_reasoning": 0
+   },
+   "costDetails": {},
+   "usagePricingTierId": null,
+   "usagePricingTierName": null,
+   "inputPrice": 0,
+   "outputPrice": 0,
+   "totalPrice": 0,
+   "calculatedInputCost": null,
+   "calculatedOutputCost": null,
+   "calculatedTotalCost": 0,
+   "unit": "TOKENS",
+   "promptTokens": 1140,
+   "completionTokens": 61,
+   "totalTokens": 1201,
+   "modelId": null,
+   "usage": {
+    "unit": "TOKENS",
+    "input": 1140,
+    "output": 61,
+    "total": 1201
+   }
+  },
+  {
+   "id": "e2a12a680ec956b2",
+   "traceId": "14a140b63a2db33e09369cea70324490",
+   "startTime": "9999-12-31T23:59:59.000Z",
+   "endTime": "9999-12-31T23:59:59.000Z",
+   "projectId": "assistant",
+   "parentObservationId": "175f8edca0f84c45",
+   "type": "CHAIN",
+   "environment": "default",
+   "name": "model",
+   "level": "DEFAULT",
+   "statusMessage": null,
+   "version": null,
+   "createdAt": "9999-12-31T23:59:59.000Z",
+   "updatedAt": "9999-12-31T23:59:59.000Z",
+   "input": {
+    "messages": [
+     {
+      "content": "Hi! I'm Sasha, second-year master's student in applied math, I study at the CS faculty. What courses are about AI?",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "3aa7db7f-96db-4267-83d2-3236ef9538de"
+     },
+     {
+      "content": "I'll look up AI-related courses for you.\n\n",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 50,
+        "prompt_tokens": 542,
+        "total_tokens": 592,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 512,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00424358,
+        "cost": 0.00424358,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281079559032833",
+       "finish_reason": "tool_calls",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-de43-7d23-a61f-66db02e075b3-0",
+      "tool_calls": [
+       {
+        "name": "spec_course_find",
+        "args": {
+         "query": "ai"
+        },
+        "id": "call-22a8bd5f-2798-4f4e-b468-1dbe77893c24",
+        "type": "tool_call"
+       }
+      ],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 542,
+       "output_tokens": 50,
+       "total_tokens": 592,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 512
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "sc-02: LLM Agents; sc-03: Computer Vision",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "tool",
+      "name": "spec_course_find",
+      "id": "d00da3bf-9e4a-45ec-86aa-2cda855902c9",
+      "tool_call_id": "call-22a8bd5f-2798-4f4e-b468-1dbe77893c24",
+      "artifact": null,
+      "status": "success"
+     },
+     {
+      "content": "\n\n",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 76,
+        "prompt_tokens": 629,
+        "total_tokens": 705,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 512,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00890802,
+        "cost": 0.00890802,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281083724369921",
+       "finish_reason": "tool_calls",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-e232-70e1-9551-2ade6472001c-0",
+      "tool_calls": [
+       {
+        "name": "spec_course_info",
+        "args": {
+         "course_id": "sc-02"
+        },
+        "id": "call_de243c2e65ee4819832568527a7604e1",
+        "type": "tool_call"
+       },
+       {
+        "name": "spec_course_info",
+        "args": {
+         "course_id": "sc-03"
+        },
+        "id": "call_c9ef0a0b758c42bdbf0bdab7e98738cd",
+        "type": "tool_call"
+       }
+      ],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 629,
+       "output_tokens": 76,
+       "total_tokens": 705,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 512
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "LLM Agents: Friday 16:30, Room 412, teacher I. Smirnov, 25 seats free.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "tool",
+      "name": "spec_course_info",
+      "id": "bdfb40f3-d7ef-4df9-836c-919ebab74fb9",
+      "tool_call_id": "call_de243c2e65ee4819832568527a7604e1",
+      "artifact": null,
+      "status": "success"
+     },
+     {
+      "content": "Computer Vision: Monday 14:00, Room 301, teacher E. Volkova, 20 seats free.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "tool",
+      "name": "spec_course_info",
+      "id": "1c5c24cb-8339-4e13-8600-6c2e6e696a81",
+      "tool_call_id": "call_c9ef0a0b758c42bdbf0bdab7e98738cd",
+      "artifact": null,
+      "status": "success"
+     },
+     {
+      "content": "Two AI courses are available:\n\n**LLM Agents** (sc-02) — Friday 16:30, Room 412, teacher I. Smirnov · 25 seats free\n**Computer Vision** (sc-03) — Monday 14:00, Room 301, teacher E. Volkova · 20 seats free\n\nWant me to enroll you in either one, Sasha?",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 83,
+        "prompt_tokens": 760,
+        "total_tokens": 843,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 0,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.01073821,
+        "cost": 0.01073821,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281090988642305",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-e8b8-7a33-ba1d-a9d72abe3444-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 760,
+       "output_tokens": 83,
+       "total_tokens": 843,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 0
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "When does the LLM Agents course meet and where?",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "22c1b5df-443b-4753-8b64-a35b2229864d"
+     },
+     {
+      "content": "**LLM Agents** (sc-02) meets **Friday at 16:30 in Room 412**, taught by I. Smirnov.",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 32,
+        "prompt_tokens": 857,
+        "total_tokens": 889,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 512,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00756029,
+        "cost": 0.00756029,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281098927935489",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-ee05-7d82-9c38-4cab2d518b2c-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 857,
+       "output_tokens": 32,
+       "total_tokens": 889,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 512
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Enroll me in LLM Agents, please.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "af5ebb4b-96a0-4d94-aee1-aac5955ed25b"
+     },
+     {
+      "content": "\n\n",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 61,
+        "prompt_tokens": 914,
+        "total_tokens": 975,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 512,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.01399347,
+        "cost": 0.01399347,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281103155924993",
+       "finish_reason": "tool_calls",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-f442-7f23-80de-f633948f7b31-0",
+      "tool_calls": [
+       {
+        "name": "spec_course_enroll",
+        "args": {
+         "course_id": "sc-02",
+         "student": "Sasha"
+        },
+        "id": "call_6b8d7d4a8a5b46918db86f7ac0c0e838",
+        "type": "tool_call"
+       }
+      ],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 914,
+       "output_tokens": 61,
+       "total_tokens": 975,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 512
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Enrolled Sasha in LLM Agents. 24 seats left.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "tool",
+      "name": "spec_course_enroll",
+      "id": "b9a74dfa-832a-48f6-9665-3926b28f14f6",
+      "tool_call_id": "call_6b8d7d4a8a5b46918db86f7ac0c0e838",
+      "artifact": null,
+      "status": "success"
+     },
+     {
+      "content": "Done — you're enrolled in **LLM Agents** (Friday 16:30, Room 412). 24 seats remain.",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 28,
+        "prompt_tokens": 999,
+        "total_tokens": 1027,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 896,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00555757,
+        "cost": 0.00555757,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281110340505601",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c89-fabb-7071-a015-59c841d34d27-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 999,
+       "output_tokens": 28,
+       "total_tokens": 1027,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 896
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Is there anything about computer vision?",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "7a300ae5-5bdf-4a81-aae4-1f71e3d59a80"
+     },
+     {
+      "content": "Yes — **Computer Vision** (sc-03) runs **Monday at 14:00 in Room 301**, taught by E. Volkova, with 20 seats free.\n\nWant me to enroll you in that one too?",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 48,
+        "prompt_tokens": 1025,
+        "total_tokens": 1073,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 0,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.01085727,
+        "cost": 0.01085727,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281116145946625",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c8a-005d-7b20-978e-cb11559dfc2d-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 1025,
+       "output_tokens": 48,
+       "total_tokens": 1073,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 0
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Who teaches the Computer Vision course?",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "34c4478a-7002-4268-82e5-f668a796e5f5"
+     },
+     {
+      "content": "**Computer Vision** (sc-03) is taught by **E. Volkova**.",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 19,
+        "prompt_tokens": 1083,
+        "total_tokens": 1102,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 768,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00621795,
+        "cost": 0.00621795,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281122651049985",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c8a-063f-72d1-8be2-31dc15c2bc78-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 1083,
+       "output_tokens": 19,
+       "total_tokens": 1102,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 768
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "How many seats are free in Computer Vision?",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "e6813209-86de-496e-8834-fe3244b2618d"
+     },
+     {
+      "content": "**20 seats** are free in Computer Vision (sc-03).",
+      "additional_kwargs": {
+       "refusal": null
+      },
+      "response_metadata": {
+       "token_usage": {
+        "completion_tokens": 15,
+        "prompt_tokens": 1114,
+        "total_tokens": 1129,
+        "completion_tokens_details": {
+         "accepted_prediction_tokens": null,
+         "audio_tokens": 0,
+         "reasoning_tokens": 0,
+         "rejected_prediction_tokens": null,
+         "text_tokens": null,
+         "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+         "audio_tokens": 0,
+         "cache_write_tokens": 0,
+         "cached_tokens": 1024,
+         "image_tokens": null,
+         "text_tokens": null,
+         "video_tokens": 0
+        },
+        "server_tool_use": null,
+        "cost_rub": 0.00266448,
+        "cost": 0.00266448,
+        "plugins": null
+       },
+       "model_provider": "openai",
+       "model_name": "deepseek/deepseek-v4.1-flash",
+       "system_fingerprint": null,
+       "id": "gen_2226281129731690497",
+       "finish_reason": "stop",
+       "logprobs": null
+      },
+      "type": "ai",
+      "name": null,
+      "id": "lc_run--01a17c8a-0d16-7940-b62b-ad9f8bf672e3-0",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "usage_metadata": {
+       "input_tokens": 1114,
+       "output_tokens": 15,
+       "total_tokens": 1129,
+       "input_token_details": {
+        "audio": 0,
+        "cache_creation": 0,
+        "cache_read": 1024
+       },
+       "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+       }
+      }
+     },
+     {
+      "content": "Fine, enroll me there as well.",
+      "additional_kwargs": {},
+      "response_metadata": {},
+      "type": "human",
+      "name": null,
+      "id": "400792b2-203e-43f8-b032-ed0d783ec9df"
+     }
+    ]
+   },
+   "output": [
+    {
+     "graph": null,
+     "update": {
+      "messages": [
+       {
+        "content": "",
+        "additional_kwargs": {
+         "refusal": null
+        },
+        "response_metadata": {
+         "token_usage": {
+          "completion_tokens": 61,
+          "prompt_tokens": 1140,
+          "total_tokens": 1201,
+          "completion_tokens_details": {
+           "accepted_prediction_tokens": null,
+           "audio_tokens": 0,
+           "reasoning_tokens": 0,
+           "rejected_prediction_tokens": null,
+           "text_tokens": null,
+           "image_tokens": 0
+          },
+          "prompt_tokens_details": {
+           "audio_tokens": 0,
+           "cache_write_tokens": 0,
+           "cached_tokens": 0,
+           "image_tokens": null,
+           "text_tokens": null,
+           "video_tokens": 0
+          },
+          "server_tool_use": null,
+          "cost_rub": 0.01250712,
+          "cost": 0.01250712,
+          "plugins": null
+         },
+         "model_provider": "openai",
+         "model_name": "deepseek/deepseek-v4.1-flash",
+         "system_fingerprint": null,
+         "id": "gen_2226281133925601281",
+         "finish_reason": "tool_calls",
+         "logprobs": null
+        },
+        "type": "ai",
+        "name": null,
+        "id": "lc_run--01a17c8a-10fe-76d1-8f2f-92b5a29e1334-0",
+        "tool_calls": [
+         {
+          "name": "spec_course_enroll",
+          "args": {
+           "course_id": "sc-03",
+           "student": "Sasha"
+          },
+          "id": "chatcmpl-tool-896cc76a7e171cbc",
+          "type": "tool_call"
+         }
+        ],
+        "invalid_tool_calls": [],
+        "usage_metadata": {
+         "input_tokens": 1140,
+         "output_tokens": 61,
+         "total_tokens": 1201,
+         "input_token_details": {
+          "audio": 0,
+          "cache_read": 0,
+          "cache_creation": 0
+         },
+         "output_token_details": {
+          "audio": 0,
+          "reasoning": 0
+         }
+        }
+       }
+      ]
+     },
+     "resume": null,
+     "goto": []
+    }
+   ],
+   "metadata": {
+    "tags": [
+     "graph:step:31"
+    ],
+    "ls_integration": "langchain_create_agent",
+    "thread_id": "load-summary",
+    "langgraph_step": 31,
+    "langgraph_node": "model",
+    "langgraph_triggers": [
+     "branch:to:model"
+    ],
+    "langgraph_path": [
+     "__pregel_pull",
+     "model"
+    ],
+    "langgraph_checkpoint_ns": "model:5f7daf98-e092-c53d-c673-8dfad7f6ba7f",
+    "resourceAttributes": {
+     "telemetry.sdk.language": "python",
+     "telemetry.sdk.name": "opentelemetry",
+     "telemetry.sdk.version": "1.45.0",
+     "service.instance.id": "b2ed86c1-12ab-4bc1-8cf7-dbf135299d15",
+     "service.name": "unknown_service:python3"
+    },
+    "scope": {
+     "name": "langfuse-sdk",
+     "version": "4.16.0",
+     "attributes": {
+      "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+     }
+    }
+   },
+   "model": null,
+   "modelParameters": {},
+   "completionStartTime": null,
+   "promptId": null,
+   "promptName": null,
+   "promptVersion": null,
+   "latency": 0,
+   "timeToFirstToken": null,
+   "usageDetails": {},
+   "costDetails": {},
+   "usagePricingTierId": null,
+   "usagePricingTierName": null,
+   "inputPrice": 0,
+   "outputPrice": 0,
+   "totalPrice": 0,
+   "calculatedInputCost": null,
+   "calculatedOutputCost": null,
+   "calculatedTotalCost": 0,
+   "unit": "TOKENS",
+   "promptTokens": 0,
+   "completionTokens": 0,
+   "totalTokens": 0,
+   "modelId": null,
+   "usage": {
+    "unit": "TOKENS",
+    "input": 0,
+    "output": 0,
+    "total": 0
+   }
+  },
+  {
+   "id": "b4edf76e5f9d78d0",
+   "traceId": "14a140b63a2db33e09369cea70324490",
+   "startTime": "9999-12-31T23:59:59.000Z",
+   "endTime": "9999-12-31T23:59:59.000Z",
+   "projectId": "assistant",
+   "parentObservationId": "859ac509b2644d00",
+   "type": "TOOL",
+   "environment": "default",
+   "name": "spec_course_enroll",
+   "level": "DEFAULT",
+   "statusMessage": null,
+   "version": null,
+   "createdAt": "9999-12-31T23:59:59.000Z",
+   "updatedAt": "9999-12-31T23:59:59.000Z",
+   "input": {
+    "course_id": "sc-03",
+    "student": "Sasha"
+   },
+   "output": {
+    "content": "Enrolled Sasha in Computer Vision. 19 seats left.",
+    "additional_kwargs": {},
+    "response_metadata": {},
+    "type": "tool",
+    "name": "spec_course_enroll",
+    "id": null,
+    "tool_call_id": "chatcmpl-tool-896cc76a7e171cbc",
+    "artifact": null,
+    "status": "success"
+   },
+   "metadata": {
+    "tags": [
+     "seq:step:1"
+    ],
+    "ls_integration": "langchain_create_agent",
+    "thread_id": "load-summary",
+    "langgraph_step": 32,
+    "langgraph_node": "tools",
+    "langgraph_triggers": [
+     "__pregel_push"
+    ],
+    "langgraph_path": [
+     "__pregel_push",
+     0,
+     false
+    ],
+    "langgraph_checkpoint_ns": "tools:eb360e9f-80d5-6050-57eb-45686c11a821",
+    "checkpoint_ns": "tools:eb360e9f-80d5-6050-57eb-45686c11a821",
+    "color": "green",
+    "tool_call_id": "chatcmpl-tool-896cc76a7e171cbc",
+    "resourceAttributes": {
+     "telemetry.sdk.language": "python",
+     "telemetry.sdk.name": "opentelemetry",
+     "telemetry.sdk.version": "1.45.0",
+     "service.instance.id": "b2ed86c1-12ab-4bc1-8cf7-dbf135299d15",
+     "service.name": "unknown_service:python3"
+    },
+    "scope": {
+     "name": "langfuse-sdk",
+     "version": "4.16.0",
+     "attributes": {
+      "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+     }
+    }
+   },
+   "model": null,
+   "modelParameters": {},
+   "completionStartTime": null,
+   "promptId": null,
+   "promptName": null,
+   "promptVersion": null,
+   "latency": 0,
+   "timeToFirstToken": null,
+   "usageDetails": {},
+   "costDetails": {},
+   "usagePricingTierId": null,
+   "usagePricingTierName": null,
+   "inputPrice": 0,
+   "outputPrice": 0,
+   "totalPrice": 0,
+   "calculatedInputCost": null,
+   "calculatedOutputCost": null,
+   "calculatedTotalCost": 0,
+   "unit": "TOKENS",
+   "promptTokens": 0,
+   "completionTokens": 0,
+   "totalTokens": 0,
+   "modelId": null,
+   "usage": {
+    "unit": "TOKENS",
+    "input": 0,
+    "output": 0,
+    "total": 0
+   }
+  }
+ ],
+ "htmlPath": "/project/assistant/traces/14a140b63a2db33e09369cea70324490",
+ "totalCost": 0
+}

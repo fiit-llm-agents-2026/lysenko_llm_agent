@@ -1,13 +1,18 @@
 import json
 import os
+import sqlite3
 import sys
+from functools import cache
+from typing import NotRequired
 
 from dotenv import load_dotenv
 from langchain.agents import create_agent
-from langchain.agents.middleware import wrap_tool_call
+from langchain.agents.middleware import AgentState, after_agent, dynamic_prompt, wrap_tool_call
 from langchain.chat_models import init_chat_model
+from langchain_core.messages import HumanMessage, RemoveMessage, SystemMessage
 from langchain_core.tools import tool
 from langchain_core.utils.function_calling import convert_to_openai_tool
+from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.errors import GraphRecursionError
 
 load_dotenv()
@@ -111,9 +116,54 @@ def log_tool_call(request, handler):
     return handler(request)
 
 
-def build_agent():
-    return create_agent(chat_model("cheap"), TOOLS, system_prompt=SYSTEM,
-                        middleware=[log_tool_call])
+class CoursesState(AgentState):
+    summary: NotRequired[str]
+
+
+SUMMARY_AFTER = 20
+
+
+@cache
+def cheap_model():
+    return chat_model("cheap")
+
+
+@dynamic_prompt
+def prompt_with_summary(request) -> str:
+    summary = request.state.get("summary")
+    return f"{SYSTEM}\nSummary of the dialogue so far: {summary}" if summary else SYSTEM
+
+
+def last_turn(messages: list) -> list:
+    start = max(i for i, m in enumerate(messages) if isinstance(m, HumanMessage))
+    return messages[start:]
+
+
+@after_agent(state_schema=CoursesState)
+def summarize(state, runtime) -> dict | None:
+    messages = state["messages"]
+    if len(messages) <= SUMMARY_AFTER:
+        return None
+    ask = HumanMessage("Fold the dialogue above into a short summary: the student's name and "
+                       "personal facts, course ids and titles, enrollments made, decisions, "
+                       "open questions.")
+    prior = []
+    if state.get("summary"):
+        prior = [SystemMessage(f"Earlier summary: {state['summary']}")]
+    digest = cheap_model().invoke(prior + messages + [ask])
+    keep = len(last_turn(messages))
+    prune = [RemoveMessage(id=m.id) for m in messages[:-keep]]
+    return {"summary": digest.text, "messages": prune}
+
+
+def sqlite_checkpointer(path: str = "assistant.db") -> SqliteSaver:
+    return SqliteSaver(sqlite3.connect(path, check_same_thread=False))
+
+
+def build_agent(checkpointer=None, summarization: bool = True):
+    memory = [prompt_with_summary, summarize] if summarization else []
+    return create_agent(cheap_model(), TOOLS, system_prompt=SYSTEM, checkpointer=checkpointer,
+                        middleware=[log_tool_call, *memory])
 
 
 def print_schemas() -> None:
@@ -123,12 +173,12 @@ def print_schemas() -> None:
         print()
 
 
-def ask(agent, text: str, callbacks: list | None = None) -> list:
-    result = agent.invoke(
+def ask(agent, text: str, thread_id: str, callbacks: list | None = None) -> dict:
+    return agent.invoke(
         {"messages": [{"role": "user", "content": text}]},
-        config={"recursion_limit": 12, "callbacks": callbacks or []},
+        config={"configurable": {"thread_id": thread_id}, "recursion_limit": 25,
+                "callbacks": callbacks or []},
     )
-    return result["messages"]
 
 
 def trace_callbacks() -> list:
@@ -146,18 +196,30 @@ def trace_callbacks() -> list:
 
 
 if __name__ == "__main__":
-    if "--schemas" in sys.argv:
+    args = sys.argv[1:]
+    if "--schemas" in args:
         print_schemas()
         raise SystemExit
-    agent = build_agent()
-    if "--mermaid" in sys.argv:
-        print(agent.get_graph().draw_mermaid())
+    if "--mermaid" in args:
+        print(build_agent().get_graph().draw_mermaid())
         raise SystemExit
-    question = " ".join(sys.argv[1:]) or "What course can I take just to relax? Enroll me as Sasha."
+    thread = "desk"
+    if "--thread" in args:
+        at = args.index("--thread")
+        if at + 1 >= len(args):
+            raise SystemExit("--thread needs a name")
+        thread = args.pop(at + 1)
+        args.pop(at)
+    agent = build_agent(sqlite_checkpointer())
+    question = " ".join(args) or "What course can I take just to relax? Enroll me as Sasha."
     callbacks = trace_callbacks()
     try:
-        for message in ask(agent, question, callbacks):
+        state = ask(agent, question, thread, callbacks)
+        for message in last_turn(state["messages"]):
             message.pretty_print()
+        summary = state.get("summary", "")
+        print(f"[state] thread={thread} | {len(state['messages'])} messages | summary: "
+              f"{summary[:80] + '...' if summary else 'none yet'}")
     except GraphRecursionError:
         print("Stopped: the agent hit the step limit without a final answer.")
     if callbacks:

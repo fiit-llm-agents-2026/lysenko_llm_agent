@@ -1,0 +1,180 @@
+langfuse: True
+
+== buffer ==
+turn  calls  input  output  largest prompt  messages in state
+[tool] spec_course_find({'query': 'ai'})
+[tool] spec_course_info({'course_id': 'sc-02'})
+[tool] spec_course_info({'course_id': 'sc-03'})
+   1      3   1931     215             760                  7
+   2      1    863      34             863                  9
+[tool] spec_course_enroll({'course_id': 'sc-02', 'student': 'Sasha'})
+   3      2   1929      94            1007                 13
+[tool] spec_course_find({'query': 'vision'})
+   4      2   2146      82            1108                 17
+   5      1   1159      15            1159                 19
+   6      1   1174      15            1174                 21
+[tool] spec_course_enroll({'course_id': 'sc-03', 'student': 'Sasha'})
+   7      2   2484     130            1284                 25
+[tool] spec_course_find({'query': 'chill'})
+[tool] spec_course_find({'query': 'relax'})
+[tool] spec_course_info({'course_id': 'sc-04'})
+[tool] spec_course_info({'course_id': 'sc-01'})
+   8      3   4490     244            1621                 33
+   9      1   1736      23            1736                 35
+[tool] spec_course_find({'query': 'math'})
+[tool] spec_course_info({'course_id': 'sc-04'})
+[tool] spec_course_info({'course_id': 'sc-05'})
+  10      3   5590     226            1980                 42
+  11      1   2109      37            2109                 44
+  12      1   2156      26            2156                 46
+[tool] spec_course_enroll({'course_id': 'sc-04', 'student': 'Sasha'})
+  13      2   4471     158            2278                 50
+[tool] spec_course_find({'query': 'coding'})
+[tool] spec_course_find({'query': 'haskell'})
+  14      2   4878     141            2491                 55
+  15      1   2568      24            2568                 57
+  16      1   2603      14            2603                 59
+  17      1   2633      96            2633                 61
+[tool] spec_course_find({'query': 'friday'})
+  18      2   5532      76            2796                 65
+  19      1   2841      22            2841                 67
+  20      1   2874      25            2874                 69
+  21      1   2915     128            2915                 71
+[tool] spec_course_enroll({'course_id': 'sc-02', 'student': 'Tim'})
+  22      2   6205      82            3144                 75
+[tool] spec_course_enroll({'course_id': 'sc-01', 'student': 'Tim'})
+  23      2   6440      96            3261                 79
+  24      1   3311      16            3311                 81
+  25      1   3344      37            3344                 83
+  26      1   3395      36            3395                 85
+  27      1   3445      26            3445                 87
+  28      1   3479      24            3479                 89
+  29      1   3518      49            3518                 91
+  30      1   3586      44            3586                 93
+[tool] spec_course_find({'query': 'games'})
+  31      2   7347      82            3703                 97
+  32      1   3758      44            3758                 99
+  33      1   3816      24            3816                101
+[tool] spec_course_enroll({'course_id': 'sc-05', 'student': 'Sasha'})
+  34      2   7794     150            3939                105
+[tool] spec_course_enroll({'course_id': 'sc-05', 'student': 'Tim'})
+  35      2   8160      81            4121                109
+  36      1   4155      15            4155                111
+  37      1   4181      23            4181                113
+  38      1   4217      22            4217                115
+[tool] spec_course_enroll({'course_id': 'sc-01', 'student': 'Sasha'})
+  39      2   8590     165            4337                119
+  40      1   4452      21            4452                121
+  41      1   4495      35            4495                123
+  42      1   4542      27            4542                125
+  43      1   4581     105            4581                127
+  44      1   4701      46            4701                129
+  45      1   4762      17            4762                131
+[tool] spec_course_find({'query': 'saturday'})
+  46      2   9670      59            4881                135
+  47      1   4912      32            4912                137
+  48      1   4954     104            4954                139
+  49      1   5069      22            5069                141
+  50      1   5118      47            5118                143
+turn 50 reply: Here's what you told me at the start:
+
+- **Name:** Sasha
+- **Year:** second-year master's student
+- **Field of study:** applied math
+- **Faculty:** CS faculty
+
+Anything else?
+
+== summary ==
+turn  calls  input  output  largest prompt  messages in state
+[tool] spec_course_find({'query': 'ai'})
+[tool] spec_course_info({'course_id': 'sc-02'})
+[tool] spec_course_info({'course_id': 'sc-03'})
+   1      3   1931     209             760                  7
+   2      1    857      32             857                  9
+[tool] spec_course_enroll({'course_id': 'sc-02', 'student': 'Sasha'})
+   3      2   1913      89             999                 13
+   4      1   1025      48            1025                 15
+   5      1   1083      19            1083                 17
+   6      1   1114      15            1114                 19
+[tool] spec_course_enroll({'course_id': 'sc-03', 'student': 'Sasha'})
+   7      3   3176     274            1224                  4
+[tool] spec_course_find({'query': 'chill'})
+[tool] spec_course_find({'query': 'relax'})
+[tool] spec_course_info({'course_id': 'sc-04'})
+[tool] spec_course_info({'course_id': 'sc-01'})
+   8      3   2880     228            1092                 12
+   9      1   1179      36            1179                 14
+[tool] spec_course_find({'query': 'math'})
+[tool] spec_course_find({'query': 'mathematics'})
+[tool] spec_course_info({'course_id': 'sc-05'})
+  10      4   5117     493            1451                  7
+  11      1   1149      37            1149                  9
+  12      1   1196      30            1196                 11
+[tool] spec_course_enroll({'course_id': 'sc-04', 'student': 'Sasha'})
+  13      2   2559      84            1322                 15
+[tool] spec_course_find({'query': 'coding'})
+[tool] spec_course_find({'query': 'haskell'})
+  14      2   2818     127            1461                 20
+  15      2   2601     386            1524                  2
+  16      1    922      15             922                  4
+  17      1    965      26             965                  6
+[tool] spec_course_find({'query': 'friday'})
+  18      2   2032      82            1046                 10
+  19      1   1097      14            1097                 12
+  20      1   1122      17            1122                 14
+  21      1   1155     105            1155                 16
+[tool] spec_course_enroll({'course_id': 'sc-02', 'student': 'Tim'})
+  22      2   2639      82            1361                 20
+[tool] spec_course_enroll({'course_id': 'sc-01', 'student': 'Tim'})
+  23      3   3910     493            1478                  4
+[tool] spec_course_info({'course_id': 'sc-02'})
+  24      2   2195      66            1137                  8
+[tool] spec_course_find({'query': 'ai'})
+  25      2   2420      97            1243                 12
+[tool] spec_course_find({'query': 'chill'})
+  26      2   2693     100            1380                 16
+  27      1   1452      62            1452                 18
+  28      1   1522      45            1522                 20
+  29      2   2716     517            1582                  2
+  30      1   1067      65            1067                  4
+[tool] spec_course_find({'query': 'games'})
+  31      2   2351      84            1205                  8
+  32      1   1262      36            1262                 10
+[tool] spec_course_info({'course_id': 'sc-05'})
+  33      2   2702      79            1390                 14
+[tool] spec_course_enroll({'course_id': 'sc-05', 'student': 'Sasha'})
+  34      2   2966      97            1525                 18
+[tool] spec_course_enroll({'course_id': 'sc-05', 'student': 'Tim'})
+  35      3   4443     581            1654                  4
+  36      1   1143      13            1143                  6
+  37      1   1167      25            1167                  8
+  38      1   1205      24            1205                 10
+[tool] spec_course_find({'query': 'chill'})
+[tool] spec_course_enroll({'course_id': 'sc-01', 'student': 'Sasha'})
+  39      3   3947     152            1394                 16
+  40      1   1454      15            1454                 18
+  41      1   1491      21            1491                 20
+  42      2   2606     562            1524                  2
+  43      1   1114     141            1114                  4
+[tool] spec_course_info({'course_id': 'sc-03'})
+[tool] spec_course_info({'course_id': 'sc-02'})
+[tool] spec_course_info({'course_id': 'sc-01'})
+[tool] spec_course_info({'course_id': 'sc-04'})
+[tool] spec_course_info({'course_id': 'sc-05'})
+  44      2   2853     237            1595                 12
+[tool] spec_course_find({'query': 'haskell'})
+  45      2   3403      72            1731                 16
+[tool] spec_course_find({'query': 'saturday'})
+  46      2   3634      58            1863                 20
+  47      2   3341     527            1893                  2
+  48      1   1067     113            1067                  4
+  49      1   1192      34            1192                  6
+  50      1   1252      27            1252                  8
+turn 50 reply: You're **Sasha**, a **second-year master's student** in **applied math**, at the **CS faculty**.
+
+== full buffer vs summarization, 50 turns each ==
+total input tokens: buffer 205079 | summary 103098 | 50% less
+total output tokens: buffer 3356 | summary 6791 | -102% less
+largest prompt: buffer 5118 | summary 1893
+turn 50 prompt: buffer 5118 | summary 1252
