@@ -2,6 +2,7 @@ import json
 import os
 import sqlite3
 import sys
+import uuid
 from functools import cache
 from typing import NotRequired
 
@@ -13,7 +14,12 @@ from langchain_core.messages import HumanMessage, RemoveMessage, SystemMessage
 from langchain_core.tools import tool
 from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.checkpoint.sqlite import SqliteSaver
+from langgraph.config import get_config, get_store
 from langgraph.errors import GraphRecursionError
+from langgraph.store.memory import InMemoryStore
+from langgraph.store.sqlite import SqliteStore
+from pydantic import BaseModel, Field
+from trustcall import create_extractor
 
 load_dotenv()
 
@@ -110,6 +116,40 @@ SYSTEM = ("You are the university special courses desk. Use the tools before ans
           "course ids come from spec_course_find. Answer briefly.")
 
 
+def user_id() -> str:
+    return get_config()["configurable"].get("user_id", "guest")
+
+
+@tool(parse_docstring=True)
+def save_memory(fact: str) -> str:
+    """Store one durable fact about the student for future conversations.
+
+    Args:
+        fact: One fact in one short sentence, for example 'enrolled in LLM Agents in September'.
+    """
+    key = uuid.uuid4().hex[:8]
+    get_store().put(("memories", user_id()), key, {"fact": fact})
+    return f"saved as {key}"
+
+
+@tool(parse_docstring=True)
+def search_memories(query: str) -> str:
+    """Look up facts stored about the student in earlier conversations.
+
+    Args:
+        query: What to look for, for example 'enrollments'.
+    """
+    hits = get_store().search(("memories", user_id()), limit=10)
+    if not hits:
+        return "nothing stored about this student yet"
+    return "; ".join(hit.value["fact"] for hit in hits)
+
+
+MEMORY_TOOLS = [save_memory, search_memories]
+MEMORY_RULES = ("Greet a student you already know by name. Save one fact per "
+                "save_memory call; read them back with search_memories.")
+
+
 @wrap_tool_call
 def log_tool_call(request, handler):
     print(f"[tool] {request.tool_call['name']}({request.tool_call['args']})")
@@ -128,10 +168,36 @@ def cheap_model():
     return chat_model("cheap")
 
 
+class Profile(BaseModel):
+    """What the special courses desk remembers about one student between conversations."""
+
+    name: str | None = Field(None, description="First name of the student speaking, "
+                             "never a name enrolled for someone else.")
+    program: str | None = Field(None, description="Year and program of study, like "
+                                "'second-year master's in applied math'.")
+    interests: str | None = Field(None, description="Course topics the student likes.")
+    constraints: str | None = Field(None, description="When the student cannot attend, "
+                                    "like 'no Monday courses'.")
+
+
+PROFILE_RULE = SystemMessage("Fill the profile from the student speaking only, never "
+                             "from a name enrolled for someone else.")
+EXTRACTOR = create_extractor(cheap_model(), tools=[Profile], tool_choice="Profile")
+
+
 @dynamic_prompt
-def prompt_with_summary(request) -> str:
-    summary = request.state.get("summary")
-    return f"{SYSTEM}\nSummary of the dialogue so far: {summary}" if summary else SYSTEM
+def desk_prompt(request) -> str:
+    parts = [SYSTEM]
+    store = request.runtime.store
+    if store is not None:
+        parts.append(MEMORY_RULES)
+        item = store.get(("profiles", user_id()), "profile")
+        card = {k: v for k, v in item.value.items() if v} if item else {}
+        if card:
+            parts.append(f"Student card: {json.dumps(card)}")
+    if request.state.get("summary"):
+        parts.append(f"Summary of the dialogue so far: {request.state['summary']}")
+    return "\n".join(parts)
 
 
 def last_turn(messages: list) -> list:
@@ -156,14 +222,37 @@ def summarize(state, runtime) -> dict | None:
     return {"summary": digest.text, "messages": prune}
 
 
+@after_agent
+def patch_profile(state, runtime) -> None:
+    namespace = ("profiles", user_id())
+    item = runtime.store.get(namespace, "profile")
+    payload = {"messages": [PROFILE_RULE] + last_turn(state["messages"])}
+    if item:
+        payload["existing"] = {"Profile": item.value}
+    result = EXTRACTOR.invoke(payload, config={"recursion_limit": 6})
+    runtime.store.put(namespace, "profile", result["responses"][0].model_dump())
+
+
+def build_store(kind: str = "sqlite", path: str = "memory.db"):
+    if kind == "memory":
+        return InMemoryStore()
+    conn = sqlite3.connect(path, isolation_level=None, check_same_thread=False)
+    store = SqliteStore(conn)
+    store.setup()
+    return store
+
+
 def sqlite_checkpointer(path: str = "assistant.db") -> SqliteSaver:
     return SqliteSaver(sqlite3.connect(path, check_same_thread=False))
 
 
-def build_agent(checkpointer=None, summarization: bool = True):
-    memory = [prompt_with_summary, summarize] if summarization else []
-    return create_agent(cheap_model(), TOOLS, system_prompt=SYSTEM, checkpointer=checkpointer,
-                        middleware=[log_tool_call, *memory])
+def build_agent(checkpointer=None, summarization: bool = True, store=None):
+    prompt = [desk_prompt] if summarization or store is not None else []
+    fold = [summarize] if summarization else []
+    guest = [patch_profile] if store is not None else []
+    tools = TOOLS + (MEMORY_TOOLS if store is not None else [])
+    return create_agent(cheap_model(), tools, system_prompt=SYSTEM, checkpointer=checkpointer,
+                        store=store, middleware=[log_tool_call, *prompt, *fold, *guest])
 
 
 def print_schemas() -> None:
@@ -173,11 +262,12 @@ def print_schemas() -> None:
         print()
 
 
-def ask(agent, text: str, thread_id: str, callbacks: list | None = None) -> dict:
+def ask(agent, text: str, thread_id: str, callbacks: list | None = None,
+        user: str = "guest") -> dict:
     return agent.invoke(
         {"messages": [{"role": "user", "content": text}]},
-        config={"configurable": {"thread_id": thread_id}, "recursion_limit": 25,
-                "callbacks": callbacks or []},
+        config={"configurable": {"thread_id": thread_id, "user_id": user},
+                "recursion_limit": 25, "callbacks": callbacks or []},
     )
 
 
@@ -201,20 +291,26 @@ if __name__ == "__main__":
         print_schemas()
         raise SystemExit
     if "--mermaid" in args:
-        print(build_agent().get_graph().draw_mermaid())
+        print(build_agent(store=InMemoryStore()).get_graph().draw_mermaid())
         raise SystemExit
-    thread = "desk"
-    if "--thread" in args:
-        at = args.index("--thread")
+
+    def option(flag: str, default: str) -> str:
+        if flag not in args:
+            return default
+        at = args.index(flag)
         if at + 1 >= len(args):
-            raise SystemExit("--thread needs a name")
-        thread = args.pop(at + 1)
-        args.pop(at)
-    agent = build_agent(sqlite_checkpointer())
+            raise SystemExit(f"{flag} needs a value")
+        value = args[at + 1]
+        del args[at:at + 2]
+        return value
+
+    thread, user = option("--thread", "desk"), option("--user", "guest")
+    store = build_store(option("--store", "sqlite"))
+    agent = build_agent(sqlite_checkpointer(), store=store)
     question = " ".join(args) or "What course can I take just to relax? Enroll me as Sasha."
     callbacks = trace_callbacks()
     try:
-        state = ask(agent, question, thread, callbacks)
+        state = ask(agent, question, thread, callbacks, user)
         for message in last_turn(state["messages"]):
             message.pretty_print()
         summary = state.get("summary", "")
@@ -222,6 +318,10 @@ if __name__ == "__main__":
               f"{summary[:80] + '...' if summary else 'none yet'}")
     except GraphRecursionError:
         print("Stopped: the agent hit the step limit without a final answer.")
+    card = store.get(("profiles", user), "profile")
+    facts = [hit.value["fact"] for hit in store.search(("memories", user))]
+    print(f"[profile] {user}: {json.dumps(card.value) if card else 'nothing yet'}")
+    print(f"[memories] {user}: {'; '.join(facts) or 'none yet'}")
     if callbacks:
         from langfuse import get_client
 
