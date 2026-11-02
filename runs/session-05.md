@@ -378,13 +378,13 @@ I don't have anything on file for you yet — could you tell me your name and wh
 you're into (subject or topic), and I'll pull up what's on the board?
 ```
 
-Стол её не узнаёт — так и должно быть. Но профиль, который этот ход оставил после себя:
+Стол её не узнаёт — так и должно быть. А вот профиль, который такие ходы оставляют после себя, — стохастический мусор. Тот же прогон, повторённый вторым процессом, закончился строкой:
 
 ```
 [profile] u-sasha: {"name": "Marisol", "program": null, "interests": null, "constraints": null}
 ```
 
-Выдуманное имя из пустоты. Тот же эксперимент на другом юзере дал второй исход — четыре `null` (`[profile] u-quiet: {"name": null, "program": null, "interests": null, "constraints": null}`), а ход «What special courses do you have this semester?» — третий: экстрактор запихал ответ тула в поле, `{"constraints": "Wednesday 19:00 is fine; no other constraints mentioned."}`. Информационно-пустой ход, три разных мусорных профиля.
+Выдуманное имя из пустоты. Ход на другом юзере дал второй исход — четыре `null` (`[profile] u-quiet: {"name": null, "program": null, "interests": null, "constraints": null}`), а ход «What special courses do you have this semester?» — третий: экстрактор запихал ответ тула в поле, `{"constraints": "Wednesday 19:00 is fine; no other constraints mentioned."}`. Информационно-пустой ход, три разных мусорных профиля.
 
 `desk_prompt` отфильтровывает пустые поля и не печатает карточку из одних `null`, но выдуманное имя фильтром не останавливается. В sqlite-сторе такой профиль прилип бы: следующий ход поприветствовал бы «Marisol». В этом прогоне стор был in-memory и умер вместе с процессом — единственная причина, почему никто не пострадал.
 
@@ -396,10 +396,12 @@ you're into (subject or topic), and I'll pull up what's on the board?
 
 | генерация | где в дереве | вход / выход |
 |---|---|---:|
-| модельный вызов 1: карточка, `search_memories` + `spec_course_find` | `model` | 1067 / 122 |
+| модельный вызов 1: карточка, `search_memories` + `spec_course_find` | `model` | 739 / 93 |
 | модельный вызов 2: `spec_course_info` ×2 | `model` | 924 / 76 |
-| модельный вызов 3: ответ | `model` | 739 / 93 |
+| модельный вызов 3: ответ | `model` | 1067 / 122 |
 | trustcall-извлечение | `patch_profile.after_agent` > `TrustCall` > `extract_updates` | 2158 / 160 |
+
+Вход вызова — системный промпт, сообщения и схемы всех пяти тулов, поэтому даже первый вызов свежего треда весит 739 токенов, а не полторы сотни. История растёт от вызова к вызову: 739 → 924 → 1067.
 
 Четыре `TOOL`-спана: `search_memories`, `spec_course_find`, `spec_course_info` ×2.
 
