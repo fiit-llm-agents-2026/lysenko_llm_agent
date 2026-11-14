@@ -3,7 +3,8 @@ import json
 
 from langgraph.types import Command
 
-from run import ENROLLMENTS, GATED, build_agent, build_store, sqlite_checkpointer
+from run import (ENROLLMENTS, GATED, build_agent, build_store, new_trace_handler,
+                 sqlite_checkpointer, trace_metadata)
 
 
 def options() -> argparse.Namespace:
@@ -17,6 +18,7 @@ def options() -> argparse.Namespace:
     parser.add_argument("--decision", choices=["approve", "edit", "reject"], default="approve")
     parser.add_argument("--args", default="", help="JSON args for an edit decision")
     parser.add_argument("--reason", default="", help="reason for a reject decision")
+    parser.add_argument("--no-trace", action="store_true")
     return parser.parse_args()
 
 
@@ -74,7 +76,13 @@ def main() -> None:
     if fork_at.tasks and fork_at.tasks[0].interrupts:
         print("[warn] this checkpoint is already a pause; prefer its parent")
 
-    paused = agent.invoke(None, config={**fork_at.config, "recursion_limit": 25})
+    handler = None if ARGS.no_trace else new_trace_handler()
+    metadata = trace_metadata(ARGS.thread, ["session-07", "fork"])
+    metadata["langfuse_trace_name"] = "session-07 fork"
+    callbacks = [handler] if handler else []
+    replay_config = {**fork_at.config, "recursion_limit": 25, "metadata": metadata,
+                     "callbacks": callbacks}
+    paused = agent.invoke(None, config=replay_config)
     if "__interrupt__" not in paused:
         raise SystemExit("the replay ended without a gate; choose another checkpoint")
     request = paused["__interrupt__"][0]
@@ -83,11 +91,16 @@ def main() -> None:
     print(f"[pause] checkpoint ..{short(pause_config)}")
 
     ENROLLMENTS.clear()
-    final = agent.invoke(Command(resume={"decisions": [decision()]}), config=pause_config)
+    resume_config = {**pause_config, "metadata": metadata, "callbacks": callbacks}
+    final = agent.invoke(Command(resume={"decisions": [decision()]}), config=resume_config)
     print(f"[decision] {ARGS.decision}")
     print(f"[answer] {final['messages'][-1].content}")
     print(f"[enrollments] {json.dumps(ENROLLMENTS, ensure_ascii=False)}")
     print(f"[branch] checkpoint ..{short(agent.get_state(config).config)}")
+    if handler:
+        from langfuse import get_client
+
+        get_client().flush()
 
 
 ARGS = options()

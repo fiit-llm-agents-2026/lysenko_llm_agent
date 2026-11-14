@@ -1,10 +1,9 @@
 from langchain_core.callbacks import BaseCallbackHandler
 from langfuse import get_client
-from langfuse.langchain import CallbackHandler
 from langgraph.checkpoint.memory import InMemorySaver
 
 import run
-from run import ask, build_agent
+from run import ask, build_agent, new_trace_handler
 
 DIALOGUE = [
     "Hi! I'm Sasha, second-year master's student in applied math, I study at the CS faculty. What courses are about AI?",
@@ -77,7 +76,10 @@ def drive(label: str, summarization: bool) -> list[tuple[int, int, int]]:
     print("turn  calls  input  output  largest prompt  messages in state")
     for turn, line in enumerate(DIALOGUE, 1):
         meter = UsageMeter()
-        state = ask(agent, line, f"load-{label}", [meter, CallbackHandler()])
+        handler = new_trace_handler()
+        state = ask(agent, line, f"load-{label}",
+                    [meter] + ([handler] if handler else []),
+                    tags=["session-07", "load-test"])
         inp = sum(i for i, _ in meter.calls)
         out = sum(o for _, o in meter.calls)
         largest = max(i for i, _ in meter.calls)

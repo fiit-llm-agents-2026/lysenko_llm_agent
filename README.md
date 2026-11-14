@@ -48,3 +48,23 @@ docker compose up -d
 ```
 
 UI: http://localhost:3000. Если в `.env` заданы ключи Langfuse, каждый запуск `run.py` пишет трейс.
+
+Трейсинг общий для всех входов: `run.py`, `load_test.py`, `chat.py` и `fork.py` берут handler из `new_trace_handler()`, а metadata — из `trace_metadata()`: `langfuse_session_id` равен треду, `langfuse_user_id` — `LANGFUSE_USER_ID` (по умолчанию `sany1111`), тег `session-07`. Так один диалог собирается в одну сессию, а прогоны фильтруются по тегу.
+
+Системный промпт живёт в prompt management:
+
+```
+uv run python run.py --publish-prompt
+```
+
+Команда публикует `SYSTEM` как `special-courses-desk` с меткой `production`. При старте `run.py` получает промпт по этой метке, а локальная строка остаётся fallback'ом, если Langfuse недоступен. Версия промпта привязывается к генерациям через `langfuse_prompt`.
+
+Цена `deepseek/deepseek-v4.1-flash` задана в Langfuse (`$0.15/1M` input, `$0.60/1M` output), поэтому в трейсах считается `totalCost`; cache-read отдельно не тарифицирован.
+
+Тест узла без инструментов:
+
+```
+uv run pytest -q
+```
+
+Разбор трейса, цены и узлов — в `runs/session-07.md`.

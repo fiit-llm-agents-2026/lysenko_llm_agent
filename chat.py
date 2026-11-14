@@ -6,7 +6,8 @@ import sys
 from langchain_core.messages import AIMessageChunk
 from langgraph.types import Command
 
-from run import ENROLLMENTS, GATED, build_agent, build_store, sqlite_checkpointer
+from run import (ENROLLMENTS, GATED, build_agent, build_store, new_trace_handler,
+                 sqlite_checkpointer, trace_metadata)
 
 
 def ask(prompt: str) -> str:
@@ -34,23 +35,16 @@ def options() -> argparse.Namespace:
 
 
 def tracer():
-    if os.getenv("LANGFUSE_PUBLIC_KEY") and not ARGS.no_trace:
-        from langfuse.langchain import CallbackHandler
-
-        return CallbackHandler()
-    return None
+    return None if ARGS.no_trace else new_trace_handler()
 
 
 def base_config(thread: str, user: str) -> dict:
+    metadata = trace_metadata(thread, ["session-07", "console"])
+    metadata["langfuse_trace_name"] = "session-07 console"
     return {
         "configurable": {"thread_id": thread, "user_id": user},
         "recursion_limit": 25,
-        "metadata": {
-            "langfuse_session_id": f"session-06:{thread}",
-            "langfuse_user_id": user,
-            "langfuse_tags": ["session-06"],
-            "langfuse_trace_name": "session-06 gate",
-        },
+        "metadata": metadata,
     }
 
 
@@ -136,27 +130,29 @@ def main() -> None:
         approvals=None if ARGS.no_gate else GATED,
     )
     config = base_config(ARGS.thread, ARGS.user)
-    snapshot = agent.get_state(config)
-    if snapshot.tasks and snapshot.tasks[0].interrupts:
-        print("[parked] a gate from an earlier process is waiting in the checkpointer")
-        resume(agent, snapshot.tasks[0].interrupts, config)
-    while True:
-        try:
-            text = ask("\nyou> ").strip()
-        except (EOFError, KeyboardInterrupt):
-            print()
-            break
-        if text in ("quit", "exit", "/quit"):
-            break
-        if not text:
-            continue
-        pause = stream(agent, {"messages": [{"role": "user", "content": text}]}, config)
-        resume(agent, pause, config)
-        print(f"[enrollments] {json.dumps(ENROLLMENTS, ensure_ascii=False)}")
-    if os.getenv("LANGFUSE_PUBLIC_KEY") and not ARGS.no_trace:
-        from langfuse import get_client
+    try:
+        snapshot = agent.get_state(config)
+        if snapshot.tasks and snapshot.tasks[0].interrupts:
+            print("[parked] a gate from an earlier process is waiting in the checkpointer")
+            resume(agent, snapshot.tasks[0].interrupts, config)
+        while True:
+            try:
+                text = ask("\nyou> ").strip()
+            except (EOFError, KeyboardInterrupt):
+                print()
+                break
+            if text in ("quit", "exit", "/quit"):
+                break
+            if not text:
+                continue
+            pause = stream(agent, {"messages": [{"role": "user", "content": text}]}, config)
+            resume(agent, pause, config)
+            print(f"[enrollments] {json.dumps(ENROLLMENTS, ensure_ascii=False)}")
+    finally:
+        if os.getenv("LANGFUSE_PUBLIC_KEY") and not ARGS.no_trace:
+            from langfuse import get_client
 
-        get_client().flush()
+            get_client().flush()
 
 
 ARGS = options()

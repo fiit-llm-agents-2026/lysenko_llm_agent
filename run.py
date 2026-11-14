@@ -116,6 +116,35 @@ TOOLS = [spec_course_find, spec_course_info, spec_course_enroll]
 GATED = {"spec_course_enroll": True}
 SYSTEM = ("You are the university special courses desk. Use the tools before answering; "
           "course ids come from spec_course_find. Answer briefly.")
+PROMPT_NAME = "special-courses-desk"
+PROMPT_LABEL = "production"
+LANGFUSE_USER = os.getenv("LANGFUSE_USER_ID") or "sany1111"
+
+
+@cache
+def prompt_source():
+    if not os.getenv("LANGFUSE_PUBLIC_KEY"):
+        return None, SYSTEM
+    try:
+        from langfuse import get_client
+
+        item = get_client().get_prompt(PROMPT_NAME, label=PROMPT_LABEL, type="text")
+        return item, item.compile()
+    except Exception as error:
+        print(f"[prompt] fallback to local SYSTEM: {type(error).__name__}: {error}")
+        return None, SYSTEM
+
+
+def system_prompt() -> str:
+    return prompt_source()[1]
+
+
+def publish_prompt() -> None:
+    from langfuse import get_client
+
+    item = get_client().create_prompt(name=PROMPT_NAME, prompt=SYSTEM,
+                                      labels=[PROMPT_LABEL], type="text")
+    print(f"[prompt] {item.name} v{item.version} label {PROMPT_LABEL}")
 
 
 def user_id() -> str:
@@ -184,12 +213,16 @@ class Profile(BaseModel):
 
 PROFILE_RULE = SystemMessage("Fill the profile from the student speaking only, never "
                              "from a name enrolled for someone else.")
-EXTRACTOR = create_extractor(cheap_model(), tools=[Profile], tool_choice="Profile")
+
+
+@cache
+def profile_extractor():
+    return create_extractor(cheap_model(), tools=[Profile], tool_choice="Profile")
 
 
 @dynamic_prompt
 def desk_prompt(request) -> str:
-    parts = [SYSTEM]
+    parts = [system_prompt()]
     store = request.runtime.store
     if store is not None:
         parts.append(MEMORY_RULES)
@@ -207,21 +240,24 @@ def last_turn(messages: list) -> list:
     return messages[start:]
 
 
-@after_agent(state_schema=CoursesState)
-def summarize(state, runtime) -> dict | None:
-    messages = state["messages"]
-    if len(messages) <= SUMMARY_AFTER:
-        return None
-    ask = HumanMessage("Fold the dialogue above into a short summary: the student's name and "
-                       "personal facts, course ids and titles, enrollments made, decisions, "
-                       "open questions.")
-    prior = []
-    if state.get("summary"):
-        prior = [SystemMessage(f"Earlier summary: {state['summary']}")]
-    digest = cheap_model().invoke(prior + messages + [ask])
-    keep = len(last_turn(messages))
-    prune = [RemoveMessage(id=m.id) for m in messages[:-keep]]
-    return {"summary": digest.text, "messages": prune}
+def make_summarize(model):
+    @after_agent(state_schema=CoursesState)
+    def summarize(state, runtime) -> dict | None:
+        messages = state["messages"]
+        if len(messages) <= SUMMARY_AFTER:
+            return None
+        ask = HumanMessage("Fold the dialogue above into a short summary: the student's name and "
+                           "personal facts, course ids and titles, enrollments made, decisions, "
+                           "open questions.")
+        prior = []
+        if state.get("summary"):
+            prior = [SystemMessage(f"Earlier summary: {state['summary']}")]
+        digest = model.invoke(prior + messages + [ask])
+        keep = len(last_turn(messages))
+        prune = [RemoveMessage(id=m.id) for m in messages[:-keep]]
+        return {"summary": digest.text, "messages": prune}
+
+    return summarize
 
 
 @after_agent
@@ -231,7 +267,7 @@ def patch_profile(state, runtime) -> None:
     payload = {"messages": [PROFILE_RULE] + last_turn(state["messages"])}
     if item:
         payload["existing"] = {"Profile": item.value}
-    result = EXTRACTOR.invoke(payload, config={"recursion_limit": 6})
+    result = profile_extractor().invoke(payload, config={"recursion_limit": 6})
     runtime.store.put(namespace, "profile", result["responses"][0].model_dump())
 
 
@@ -250,12 +286,13 @@ def sqlite_checkpointer(path: str = "assistant.db") -> SqliteSaver:
 
 def build_agent(checkpointer=None, summarization: bool = True, store=None, approvals=None):
     prompt = [desk_prompt] if summarization or store is not None else []
-    fold = [summarize] if summarization else []
+    fold = [make_summarize(cheap_model())] if summarization else []
     guest = [patch_profile] if store is not None else []
     guard = [HumanInTheLoopMiddleware(interrupt_on=approvals)] if approvals else []
     tools = TOOLS + (MEMORY_TOOLS if store is not None else [])
-    return create_agent(cheap_model(), tools, system_prompt=SYSTEM, checkpointer=checkpointer,
-                        store=store, middleware=[log_tool_call, *prompt, *fold, *guest, *guard])
+    return create_agent(cheap_model(), tools, system_prompt=system_prompt(),
+                        checkpointer=checkpointer, store=store,
+                        middleware=[log_tool_call, *prompt, *fold, *guest, *guard])
 
 
 def print_schemas() -> None:
@@ -265,12 +302,33 @@ def print_schemas() -> None:
         print()
 
 
+def trace_metadata(thread_id: str, tags: list[str] | None = None) -> dict:
+    prompt, _ = prompt_source()
+    metadata = {
+        "langfuse_session_id": thread_id,
+        "langfuse_user_id": LANGFUSE_USER,
+        "langfuse_tags": tags or ["session-07"],
+    }
+    if prompt is not None:
+        metadata["langfuse_prompt"] = prompt
+    return metadata
+
+
+def new_trace_handler():
+    if not os.getenv("LANGFUSE_PUBLIC_KEY"):
+        return None
+    from langfuse.langchain import CallbackHandler
+
+    return CallbackHandler()
+
+
 def ask(agent, text: str, thread_id: str, callbacks: list | None = None,
-        user: str = "guest") -> dict:
+        user: str = "guest", tags: list[str] | None = None) -> dict:
     return agent.invoke(
         {"messages": [{"role": "user", "content": text}]},
         config={"configurable": {"thread_id": thread_id, "user_id": user},
-                "recursion_limit": 25, "callbacks": callbacks or []},
+                "recursion_limit": 25, "callbacks": callbacks or [],
+                "metadata": trace_metadata(thread_id, tags)},
     )
 
 
@@ -278,18 +336,21 @@ def trace_callbacks() -> list:
     if not os.getenv("LANGFUSE_PUBLIC_KEY"):
         return []
     from langfuse import get_client
-    from langfuse.langchain import CallbackHandler
 
     try:
         up = get_client().auth_check()
     except Exception as error:
         up = type(error).__name__
     print("langfuse:", os.getenv("LANGFUSE_HOST"), "| up:", up)
-    return [CallbackHandler()] if up is True else []
+    handler = new_trace_handler() if up is True else None
+    return [handler] if handler else []
 
 
 if __name__ == "__main__":
     args = sys.argv[1:]
+    if "--publish-prompt" in args:
+        publish_prompt()
+        raise SystemExit
     if "--schemas" in args:
         print_schemas()
         raise SystemExit
