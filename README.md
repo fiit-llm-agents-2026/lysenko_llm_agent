@@ -21,6 +21,24 @@ uv run python run.py --mermaid
 
 Нагрузочный тест: `uv run python load_test.py` дважды прогоняет один и тот же 50-ходовой диалог (full buffer и суммаризация) и печатает токены по ходам. Результаты — в `runs/session-04.md`.
 
+## Подтверждение и стриминг
+
+`spec_course_enroll` — единственный инструмент, меняющий состояние, поэтому в интерактивном клиенте он закрыт `HumanInTheLoopMiddleware`: агент паркует ход в чекпоинтере и ждёт решения человека. Батчевые прогоны (`run.py`, `load_test.py`) остаются без гейта.
+
+```
+uv run python chat.py --thread demo --user u-sasha --store none
+```
+
+`chat.py` стримит токены (`stream_mode=["messages", "updates"]`), на паузе спрашивает `approve / edit / reject / respond` и продолжает через `Command(resume=...)`. Пауза переживает перезапуск процесса: `SqliteSaver` держит её в `assistant.db`, клиент подхватывает её при старте.
+
+```
+uv run python fork.py --thread demo --list
+uv run python fork.py --thread demo --store none --at <checkpoint_id> --decision approve
+uv run python fork.py --thread demo --store none --at <checkpoint_id> --decision reject
+```
+
+`fork.py` проигрывает тред от указанного чекпоинта: два запуска с разными решениями оставляют в истории две ветки одного диалога. Разбор — в `runs/session-06.md`.
+
 ## Langfuse
 
 `docker-compose.yml` — upstream Langfuse v3.224.0, `docker-compose.override.yml` создаёт проект из ключей в `.env`, подменяет образ minio (`cgr.dev` недоступен) и убирает проброс порта postgres на хост.

@@ -1,0 +1,2542 @@
+{
+  "id": "53062cbb10e0991ad336a10b148f615f",
+  "projectId": "assistant",
+  "name": "session-06 gate",
+  "timestamp": "9999-12-31T23:59:59.000Z",
+  "environment": "default",
+  "tags": [
+    "session-06"
+  ],
+  "bookmarked": false,
+  "release": null,
+  "version": null,
+  "userId": "u-sasha",
+  "sessionId": "session-06:session-06",
+  "public": false,
+  "input": {
+    "graph": null,
+    "update": null,
+    "resume": {
+      "decisions": [
+        {
+          "type": "approve"
+        }
+      ]
+    },
+    "goto": []
+  },
+  "output": {
+    "messages": [
+      {
+        "content": "Enroll me as Sasha in Board Game Theory.",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "human",
+        "name": null,
+        "id": "e8551e00-4150-4286-9997-8b17bdbcf4ad"
+      },
+      {
+        "content": "I'll find that course first.",
+        "additional_kwargs": {},
+        "response_metadata": {
+          "finish_reason": "tool_calls",
+          "model_name": "deepseek/deepseek-v4.1-flash",
+          "model_provider": "openai"
+        },
+        "type": "ai",
+        "name": null,
+        "id": "lc_run--01a1da99-a314-7103-b6ab-6b96c6a47ec0",
+        "tool_calls": [
+          {
+            "name": "spec_course_find",
+            "args": {
+              "query": "board"
+            },
+            "id": "call_2fb2c87ca9c94435ae16a1fa",
+            "type": "tool_call"
+          }
+        ],
+        "invalid_tool_calls": [],
+        "usage_metadata": {
+          "input_tokens": 524,
+          "output_tokens": 47,
+          "total_tokens": 571,
+          "input_token_details": {
+            "audio": 0,
+            "cache_creation": 0,
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "audio": 0,
+            "reasoning": 0
+          }
+        }
+      },
+      {
+        "content": "sc-04: Board Game Theory",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "spec_course_find",
+        "id": "11c9daaa-1ef6-4312-b928-a9ccaffd0c28",
+        "tool_call_id": "call_2fb2c87ca9c94435ae16a1fa",
+        "artifact": null,
+        "status": "success"
+      },
+      {
+        "content": "\n\n",
+        "additional_kwargs": {},
+        "response_metadata": {
+          "finish_reason": "tool_calls",
+          "model_name": "deepseek/deepseek-v4.1-flash",
+          "model_provider": "openai"
+        },
+        "type": "ai",
+        "name": null,
+        "id": "lc_run--01a1da99-b094-7302-9f88-fd5da50fc3a1",
+        "tool_calls": [
+          {
+            "name": "spec_course_enroll",
+            "args": {
+              "course_id": "sc-04",
+              "student": "Sasha"
+            },
+            "id": "call_ac9890cb3f394c948a3338e87357df60",
+            "type": "tool_call"
+          }
+        ],
+        "invalid_tool_calls": [],
+        "usage_metadata": {
+          "input_tokens": 601,
+          "output_tokens": 61,
+          "total_tokens": 662,
+          "input_token_details": {
+            "audio": 0,
+            "cache_creation": 0,
+            "cache_read": 512
+          },
+          "output_token_details": {
+            "audio": 0,
+            "reasoning": 0
+          }
+        }
+      },
+      {
+        "content": "User rejected the tool call for `spec_course_enroll` with reason: Wait, I only wanted the schedule, not an enrollment.",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "spec_course_enroll",
+        "id": "caa90b4f-239a-47aa-bbe7-88a93650b239",
+        "tool_call_id": "call_ac9890cb3f394c948a3338e87357df60",
+        "artifact": null,
+        "status": "error"
+      },
+      {
+        "content": "Understood — no enrollment made. Here's the schedule infoinstead:",
+        "additional_kwargs": {},
+        "response_metadata": {
+          "finish_reason": "tool_calls",
+          "model_name": "deepseek/deepseek-v4.1-flash",
+          "model_provider": "openai"
+        },
+        "type": "ai",
+        "name": null,
+        "id": "lc_run--01a1da99-bc25-76f2-95e3-46e4fcb4f39b",
+        "tool_calls": [
+          {
+            "name": "spec_course_info",
+            "args": {
+              "course_id": "sc-04"
+            },
+            "id": "call_ed5570da272245ca812c579a",
+            "type": "tool_call"
+          }
+        ],
+        "invalid_tool_calls": [],
+        "usage_metadata": {
+          "input_tokens": 688,
+          "output_tokens": 55,
+          "total_tokens": 743,
+          "input_token_details": {
+            "audio": 0,
+            "cache_creation": 0,
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "audio": 0,
+            "reasoning": 0
+          }
+        }
+      },
+      {
+        "content": "Board Game Theory: Wednesday 19:00, Student club, teacher D. Orlov, 3 seats free.",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "spec_course_info",
+        "id": "f14b21b4-44ec-4386-ad6a-5f2108386dcf",
+        "tool_call_id": "call_ed5570da272245ca812c579a",
+        "artifact": null,
+        "status": "success"
+      },
+      {
+        "content": "**Board Game Theory (sc-04)**\n- Wednesday, 19:00\n- Room: Student club\n- Teacher: D. Orlov\n- Free seats: 3\n\nLet me know if you'd like me to enroll you.",
+        "additional_kwargs": {},
+        "response_metadata": {
+          "finish_reason": "stop",
+          "model_name": "deepseek/deepseek-v4.1-flash",
+          "model_provider": "openai"
+        },
+        "type": "ai",
+        "name": null,
+        "id": "lc_run--01a1da99-c950-7240-870a-308742c2937b",
+        "tool_calls": [],
+        "invalid_tool_calls": [],
+        "usage_metadata": {
+          "input_tokens": 779,
+          "output_tokens": 52,
+          "total_tokens": 831,
+          "input_token_details": {
+            "audio": 0,
+            "cache_creation": 0,
+            "cache_read": 512
+          },
+          "output_token_details": {
+            "audio": 0,
+            "reasoning": 0
+          }
+        }
+      },
+      {
+        "content": "Okay, now enroll me as Sasha in Board Game Theory.",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "human",
+        "name": null,
+        "id": "120912ad-6da0-4336-9e8d-2f75abbf0d16"
+      },
+      {
+        "content": "",
+        "additional_kwargs": {},
+        "response_metadata": {
+          "finish_reason": "tool_calls",
+          "model_name": "deepseek/deepseek-v4.1-flash",
+          "model_provider": "openai"
+        },
+        "type": "ai",
+        "name": null,
+        "id": "lc_run--01a1da99-d9ab-7c43-862b-e7f2d9f67063",
+        "tool_calls": [
+          {
+            "name": "spec_course_enroll",
+            "args": {
+              "course_id": "sc-04",
+              "student": "Sasha"
+            },
+            "id": "call_0_196f5759118245c1",
+            "type": "tool_call"
+          }
+        ],
+        "invalid_tool_calls": [],
+        "usage_metadata": {
+          "input_tokens": 847,
+          "output_tokens": 61,
+          "total_tokens": 908,
+          "input_token_details": {
+            "audio": 0,
+            "cache_creation": 0,
+            "cache_read": 768
+          },
+          "output_token_details": {
+            "audio": 0,
+            "reasoning": 0
+          }
+        }
+      },
+      {
+        "content": "Enrolled Sasha in Board Game Theory. 2 seats left.",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "spec_course_enroll",
+        "id": "0468ea1b-e9cb-450b-b79c-38820c19d679",
+        "tool_call_id": "call_0_196f5759118245c1",
+        "artifact": null,
+        "status": "success"
+      },
+      {
+        "content": "Done — you're enrolled in **Board Game Theory** (sc-04). 2 seats left.",
+        "additional_kwargs": {},
+        "response_metadata": {
+          "finish_reason": "stop",
+          "model_name": "deepseek/deepseek-v4.1-flash",
+          "model_provider": "openai"
+        },
+        "type": "ai",
+        "name": null,
+        "id": "lc_run--01a1da99-e5ea-71a0-b65f-077a76763f1e",
+        "tool_calls": [],
+        "invalid_tool_calls": [],
+        "usage_metadata": {
+          "input_tokens": 944,
+          "output_tokens": 22,
+          "total_tokens": 966,
+          "input_token_details": {
+            "audio": 0,
+            "cache_creation": 0,
+            "cache_read": 512
+          },
+          "output_token_details": {
+            "audio": 0,
+            "reasoning": 0
+          }
+        }
+      }
+    ],
+    "hitl_edited_tool_calls": {}
+  },
+  "metadata": {
+    "ls_integration": "langchain_create_agent",
+    "thread_id": "session-06",
+    "is_langchain_root": true,
+    "resourceAttributes": {
+      "telemetry.sdk.language": "python",
+      "telemetry.sdk.name": "opentelemetry",
+      "telemetry.sdk.version": "1.45.0",
+      "service.instance.id": "0b038f15-0e5f-458b-aba0-46ec9bb63999",
+      "service.name": "unknown_service:python3"
+    },
+    "scope": {
+      "name": "langfuse-sdk",
+      "version": "4.16.0",
+      "attributes": {
+        "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+      }
+    }
+  },
+  "createdAt": "9999-12-31T23:59:59.000Z",
+  "updatedAt": "9999-12-31T23:59:59.000Z",
+  "externalId": null,
+  "scores": [],
+  "latency": 0,
+  "observations": [
+    {
+      "id": "2dc1460f8a51ed0a",
+      "traceId": "53062cbb10e0991ad336a10b148f615f",
+      "startTime": "9999-12-31T23:59:59.000Z",
+      "endTime": "9999-12-31T23:59:59.000Z",
+      "projectId": "assistant",
+      "parentObservationId": "60b98ce64de24502",
+      "type": "AGENT",
+      "environment": "default",
+      "name": "summarize.after_agent",
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "version": null,
+      "createdAt": "9999-12-31T23:59:59.000Z",
+      "updatedAt": "9999-12-31T23:59:59.000Z",
+      "input": {
+        "messages": [
+          {
+            "content": "Enroll me as Sasha in Board Game Theory.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": "e8551e00-4150-4286-9997-8b17bdbcf4ad"
+          },
+          {
+            "content": "I'll find that course first.",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-a314-7103-b6ab-6b96c6a47ec0",
+            "tool_calls": [
+              {
+                "name": "spec_course_find",
+                "args": {
+                  "query": "board"
+                },
+                "id": "call_2fb2c87ca9c94435ae16a1fa",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 524,
+              "output_tokens": 47,
+              "total_tokens": 571,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "sc-04: Board Game Theory",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_find",
+            "id": "11c9daaa-1ef6-4312-b928-a9ccaffd0c28",
+            "tool_call_id": "call_2fb2c87ca9c94435ae16a1fa",
+            "artifact": null,
+            "status": "success"
+          },
+          {
+            "content": "\n\n",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-b094-7302-9f88-fd5da50fc3a1",
+            "tool_calls": [
+              {
+                "name": "spec_course_enroll",
+                "args": {
+                  "course_id": "sc-04",
+                  "student": "Sasha"
+                },
+                "id": "call_ac9890cb3f394c948a3338e87357df60",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 601,
+              "output_tokens": 61,
+              "total_tokens": 662,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 512
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "User rejected the tool call for `spec_course_enroll` with reason: Wait, I only wanted the schedule, not an enrollment.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_enroll",
+            "id": "caa90b4f-239a-47aa-bbe7-88a93650b239",
+            "tool_call_id": "call_ac9890cb3f394c948a3338e87357df60",
+            "artifact": null,
+            "status": "error"
+          },
+          {
+            "content": "Understood — no enrollment made. Here's the schedule infoinstead:",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-bc25-76f2-95e3-46e4fcb4f39b",
+            "tool_calls": [
+              {
+                "name": "spec_course_info",
+                "args": {
+                  "course_id": "sc-04"
+                },
+                "id": "call_ed5570da272245ca812c579a",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 688,
+              "output_tokens": 55,
+              "total_tokens": 743,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "Board Game Theory: Wednesday 19:00, Student club, teacher D. Orlov, 3 seats free.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_info",
+            "id": "f14b21b4-44ec-4386-ad6a-5f2108386dcf",
+            "tool_call_id": "call_ed5570da272245ca812c579a",
+            "artifact": null,
+            "status": "success"
+          },
+          {
+            "content": "**Board Game Theory (sc-04)**\n- Wednesday, 19:00\n- Room: Student club\n- Teacher: D. Orlov\n- Free seats: 3\n\nLet me know if you'd like me to enroll you.",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "stop",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-c950-7240-870a-308742c2937b",
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 779,
+              "output_tokens": 52,
+              "total_tokens": 831,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 512
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "Okay, now enroll me as Sasha in Board Game Theory.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": "120912ad-6da0-4336-9e8d-2f75abbf0d16"
+          },
+          {
+            "content": "",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-d9ab-7c43-862b-e7f2d9f67063",
+            "tool_calls": [
+              {
+                "name": "spec_course_enroll",
+                "args": {
+                  "course_id": "sc-04",
+                  "student": "Sasha"
+                },
+                "id": "call_0_196f5759118245c1",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 847,
+              "output_tokens": 61,
+              "total_tokens": 908,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 768
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "Enrolled Sasha in Board Game Theory. 2 seats left.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_enroll",
+            "id": "0468ea1b-e9cb-450b-b79c-38820c19d679",
+            "tool_call_id": "call_0_196f5759118245c1",
+            "artifact": null,
+            "status": "success"
+          },
+          {
+            "content": "Done — you're enrolled in **Board Game Theory** (sc-04). 2 seats left.",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "stop",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-e5ea-71a0-b65f-077a76763f1e",
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 944,
+              "output_tokens": 22,
+              "total_tokens": 966,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 512
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          }
+        ],
+        "hitl_edited_tool_calls": {}
+      },
+      "output": null,
+      "metadata": {
+        "tags": [
+          "graph:step:19"
+        ],
+        "ls_integration": "langchain_create_agent",
+        "thread_id": "session-06",
+        "langgraph_step": 19,
+        "langgraph_node": "summarize.after_agent",
+        "langgraph_triggers": [
+          "branch:to:summarize.after_agent"
+        ],
+        "langgraph_path": [
+          "__pregel_pull",
+          "summarize.after_agent"
+        ],
+        "langgraph_checkpoint_ns": "summarize.after_agent:00cacba6-bb13-74ab-211f-db20d06513d9",
+        "resourceAttributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.45.0",
+          "service.instance.id": "0b038f15-0e5f-458b-aba0-46ec9bb63999",
+          "service.name": "unknown_service:python3"
+        },
+        "scope": {
+          "name": "langfuse-sdk",
+          "version": "4.16.0",
+          "attributes": {
+            "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+          }
+        }
+      },
+      "model": null,
+      "modelParameters": {},
+      "completionStartTime": null,
+      "promptId": null,
+      "promptName": null,
+      "promptVersion": null,
+      "latency": 0,
+      "timeToFirstToken": null,
+      "usageDetails": {},
+      "costDetails": {},
+      "usagePricingTierId": null,
+      "usagePricingTierName": null,
+      "inputPrice": 0,
+      "outputPrice": 0,
+      "totalPrice": 0,
+      "calculatedInputCost": null,
+      "calculatedOutputCost": null,
+      "calculatedTotalCost": 0,
+      "unit": "TOKENS",
+      "promptTokens": 0,
+      "completionTokens": 0,
+      "totalTokens": 0,
+      "modelId": null,
+      "usage": {
+        "unit": "TOKENS",
+        "input": 0,
+        "output": 0,
+        "total": 0
+      }
+    },
+    {
+      "id": "60b98ce64de24502",
+      "traceId": "53062cbb10e0991ad336a10b148f615f",
+      "startTime": "9999-12-31T23:59:59.000Z",
+      "endTime": "9999-12-31T23:59:59.000Z",
+      "projectId": "assistant",
+      "parentObservationId": null,
+      "type": "CHAIN",
+      "environment": "default",
+      "name": "LangGraph",
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "version": null,
+      "createdAt": "9999-12-31T23:59:59.000Z",
+      "updatedAt": "9999-12-31T23:59:59.000Z",
+      "input": {
+        "graph": null,
+        "update": null,
+        "resume": {
+          "decisions": [
+            {
+              "type": "approve"
+            }
+          ]
+        },
+        "goto": []
+      },
+      "output": {
+        "messages": [
+          {
+            "content": "Enroll me as Sasha in Board Game Theory.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": "e8551e00-4150-4286-9997-8b17bdbcf4ad"
+          },
+          {
+            "content": "I'll find that course first.",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-a314-7103-b6ab-6b96c6a47ec0",
+            "tool_calls": [
+              {
+                "name": "spec_course_find",
+                "args": {
+                  "query": "board"
+                },
+                "id": "call_2fb2c87ca9c94435ae16a1fa",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 524,
+              "output_tokens": 47,
+              "total_tokens": 571,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "sc-04: Board Game Theory",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_find",
+            "id": "11c9daaa-1ef6-4312-b928-a9ccaffd0c28",
+            "tool_call_id": "call_2fb2c87ca9c94435ae16a1fa",
+            "artifact": null,
+            "status": "success"
+          },
+          {
+            "content": "\n\n",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-b094-7302-9f88-fd5da50fc3a1",
+            "tool_calls": [
+              {
+                "name": "spec_course_enroll",
+                "args": {
+                  "course_id": "sc-04",
+                  "student": "Sasha"
+                },
+                "id": "call_ac9890cb3f394c948a3338e87357df60",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 601,
+              "output_tokens": 61,
+              "total_tokens": 662,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 512
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "User rejected the tool call for `spec_course_enroll` with reason: Wait, I only wanted the schedule, not an enrollment.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_enroll",
+            "id": "caa90b4f-239a-47aa-bbe7-88a93650b239",
+            "tool_call_id": "call_ac9890cb3f394c948a3338e87357df60",
+            "artifact": null,
+            "status": "error"
+          },
+          {
+            "content": "Understood — no enrollment made. Here's the schedule infoinstead:",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-bc25-76f2-95e3-46e4fcb4f39b",
+            "tool_calls": [
+              {
+                "name": "spec_course_info",
+                "args": {
+                  "course_id": "sc-04"
+                },
+                "id": "call_ed5570da272245ca812c579a",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 688,
+              "output_tokens": 55,
+              "total_tokens": 743,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "Board Game Theory: Wednesday 19:00, Student club, teacher D. Orlov, 3 seats free.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_info",
+            "id": "f14b21b4-44ec-4386-ad6a-5f2108386dcf",
+            "tool_call_id": "call_ed5570da272245ca812c579a",
+            "artifact": null,
+            "status": "success"
+          },
+          {
+            "content": "**Board Game Theory (sc-04)**\n- Wednesday, 19:00\n- Room: Student club\n- Teacher: D. Orlov\n- Free seats: 3\n\nLet me know if you'd like me to enroll you.",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "stop",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-c950-7240-870a-308742c2937b",
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 779,
+              "output_tokens": 52,
+              "total_tokens": 831,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 512
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "Okay, now enroll me as Sasha in Board Game Theory.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": "120912ad-6da0-4336-9e8d-2f75abbf0d16"
+          },
+          {
+            "content": "",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-d9ab-7c43-862b-e7f2d9f67063",
+            "tool_calls": [
+              {
+                "name": "spec_course_enroll",
+                "args": {
+                  "course_id": "sc-04",
+                  "student": "Sasha"
+                },
+                "id": "call_0_196f5759118245c1",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 847,
+              "output_tokens": 61,
+              "total_tokens": 908,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 768
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "Enrolled Sasha in Board Game Theory. 2 seats left.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_enroll",
+            "id": "0468ea1b-e9cb-450b-b79c-38820c19d679",
+            "tool_call_id": "call_0_196f5759118245c1",
+            "artifact": null,
+            "status": "success"
+          },
+          {
+            "content": "Done — you're enrolled in **Board Game Theory** (sc-04). 2 seats left.",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "stop",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-e5ea-71a0-b65f-077a76763f1e",
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 944,
+              "output_tokens": 22,
+              "total_tokens": 966,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 512
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          }
+        ],
+        "hitl_edited_tool_calls": {}
+      },
+      "metadata": {
+        "ls_integration": "langchain_create_agent",
+        "thread_id": "session-06",
+        "is_langchain_root": true,
+        "resourceAttributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.45.0",
+          "service.instance.id": "0b038f15-0e5f-458b-aba0-46ec9bb63999",
+          "service.name": "unknown_service:python3"
+        },
+        "scope": {
+          "name": "langfuse-sdk",
+          "version": "4.16.0",
+          "attributes": {
+            "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+          }
+        }
+      },
+      "model": null,
+      "modelParameters": {},
+      "completionStartTime": null,
+      "promptId": null,
+      "promptName": null,
+      "promptVersion": null,
+      "latency": 0,
+      "timeToFirstToken": null,
+      "usageDetails": {},
+      "costDetails": {},
+      "usagePricingTierId": null,
+      "usagePricingTierName": null,
+      "inputPrice": 0,
+      "outputPrice": 0,
+      "totalPrice": 0,
+      "calculatedInputCost": null,
+      "calculatedOutputCost": null,
+      "calculatedTotalCost": 0,
+      "unit": "TOKENS",
+      "promptTokens": 0,
+      "completionTokens": 0,
+      "totalTokens": 0,
+      "modelId": null,
+      "usage": {
+        "unit": "TOKENS",
+        "input": 0,
+        "output": 0,
+        "total": 0
+      }
+    },
+    {
+      "id": "921daa305d6b9603",
+      "traceId": "53062cbb10e0991ad336a10b148f615f",
+      "startTime": "9999-12-31T23:59:59.000Z",
+      "endTime": "9999-12-31T23:59:59.000Z",
+      "projectId": "assistant",
+      "parentObservationId": "60b98ce64de24502",
+      "type": "CHAIN",
+      "environment": "default",
+      "name": "model",
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "version": null,
+      "createdAt": "9999-12-31T23:59:59.000Z",
+      "updatedAt": "9999-12-31T23:59:59.000Z",
+      "input": {
+        "messages": [
+          {
+            "content": "Enroll me as Sasha in Board Game Theory.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": "e8551e00-4150-4286-9997-8b17bdbcf4ad"
+          },
+          {
+            "content": "I'll find that course first.",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-a314-7103-b6ab-6b96c6a47ec0",
+            "tool_calls": [
+              {
+                "name": "spec_course_find",
+                "args": {
+                  "query": "board"
+                },
+                "id": "call_2fb2c87ca9c94435ae16a1fa",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 524,
+              "output_tokens": 47,
+              "total_tokens": 571,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "sc-04: Board Game Theory",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_find",
+            "id": "11c9daaa-1ef6-4312-b928-a9ccaffd0c28",
+            "tool_call_id": "call_2fb2c87ca9c94435ae16a1fa",
+            "artifact": null,
+            "status": "success"
+          },
+          {
+            "content": "\n\n",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-b094-7302-9f88-fd5da50fc3a1",
+            "tool_calls": [
+              {
+                "name": "spec_course_enroll",
+                "args": {
+                  "course_id": "sc-04",
+                  "student": "Sasha"
+                },
+                "id": "call_ac9890cb3f394c948a3338e87357df60",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 601,
+              "output_tokens": 61,
+              "total_tokens": 662,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 512
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "User rejected the tool call for `spec_course_enroll` with reason: Wait, I only wanted the schedule, not an enrollment.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_enroll",
+            "id": "caa90b4f-239a-47aa-bbe7-88a93650b239",
+            "tool_call_id": "call_ac9890cb3f394c948a3338e87357df60",
+            "artifact": null,
+            "status": "error"
+          },
+          {
+            "content": "Understood — no enrollment made. Here's the schedule infoinstead:",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-bc25-76f2-95e3-46e4fcb4f39b",
+            "tool_calls": [
+              {
+                "name": "spec_course_info",
+                "args": {
+                  "course_id": "sc-04"
+                },
+                "id": "call_ed5570da272245ca812c579a",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 688,
+              "output_tokens": 55,
+              "total_tokens": 743,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "Board Game Theory: Wednesday 19:00, Student club, teacher D. Orlov, 3 seats free.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_info",
+            "id": "f14b21b4-44ec-4386-ad6a-5f2108386dcf",
+            "tool_call_id": "call_ed5570da272245ca812c579a",
+            "artifact": null,
+            "status": "success"
+          },
+          {
+            "content": "**Board Game Theory (sc-04)**\n- Wednesday, 19:00\n- Room: Student club\n- Teacher: D. Orlov\n- Free seats: 3\n\nLet me know if you'd like me to enroll you.",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "stop",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-c950-7240-870a-308742c2937b",
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 779,
+              "output_tokens": 52,
+              "total_tokens": 831,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 512
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "Okay, now enroll me as Sasha in Board Game Theory.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": "120912ad-6da0-4336-9e8d-2f75abbf0d16"
+          },
+          {
+            "content": "",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-d9ab-7c43-862b-e7f2d9f67063",
+            "tool_calls": [
+              {
+                "name": "spec_course_enroll",
+                "args": {
+                  "course_id": "sc-04",
+                  "student": "Sasha"
+                },
+                "id": "call_0_196f5759118245c1",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 847,
+              "output_tokens": 61,
+              "total_tokens": 908,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 768
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "Enrolled Sasha in Board Game Theory. 2 seats left.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_enroll",
+            "id": "0468ea1b-e9cb-450b-b79c-38820c19d679",
+            "tool_call_id": "call_0_196f5759118245c1",
+            "artifact": null,
+            "status": "success"
+          }
+        ],
+        "hitl_edited_tool_calls": {}
+      },
+      "output": [
+        {
+          "graph": null,
+          "update": {
+            "messages": [
+              {
+                "content": "Done — you're enrolled in **Board Game Theory** (sc-04). 2 seats left.",
+                "additional_kwargs": {},
+                "response_metadata": {
+                  "finish_reason": "stop",
+                  "model_name": "deepseek/deepseek-v4.1-flash",
+                  "model_provider": "openai"
+                },
+                "type": "ai",
+                "name": null,
+                "id": "lc_run--01a1da99-e5ea-71a0-b65f-077a76763f1e",
+                "tool_calls": [],
+                "invalid_tool_calls": [],
+                "usage_metadata": {
+                  "input_tokens": 944,
+                  "output_tokens": 22,
+                  "total_tokens": 966,
+                  "input_token_details": {
+                    "audio": 0,
+                    "cache_creation": 0,
+                    "cache_read": 512
+                  },
+                  "output_token_details": {
+                    "audio": 0,
+                    "reasoning": 0
+                  }
+                }
+              }
+            ]
+          },
+          "resume": null,
+          "goto": []
+        }
+      ],
+      "metadata": {
+        "tags": [
+          "graph:step:17"
+        ],
+        "ls_integration": "langchain_create_agent",
+        "thread_id": "session-06",
+        "langgraph_step": 17,
+        "langgraph_node": "model",
+        "langgraph_triggers": [
+          "branch:to:model"
+        ],
+        "langgraph_path": [
+          "__pregel_pull",
+          "model"
+        ],
+        "langgraph_checkpoint_ns": "model:b6e5e240-f202-51ac-f662-53cf1e833c86",
+        "resourceAttributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.45.0",
+          "service.instance.id": "0b038f15-0e5f-458b-aba0-46ec9bb63999",
+          "service.name": "unknown_service:python3"
+        },
+        "scope": {
+          "name": "langfuse-sdk",
+          "version": "4.16.0",
+          "attributes": {
+            "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+          }
+        }
+      },
+      "model": null,
+      "modelParameters": {},
+      "completionStartTime": null,
+      "promptId": null,
+      "promptName": null,
+      "promptVersion": null,
+      "latency": 0,
+      "timeToFirstToken": null,
+      "usageDetails": {},
+      "costDetails": {},
+      "usagePricingTierId": null,
+      "usagePricingTierName": null,
+      "inputPrice": 0,
+      "outputPrice": 0,
+      "totalPrice": 0,
+      "calculatedInputCost": null,
+      "calculatedOutputCost": null,
+      "calculatedTotalCost": 0,
+      "unit": "TOKENS",
+      "promptTokens": 0,
+      "completionTokens": 0,
+      "totalTokens": 0,
+      "modelId": null,
+      "usage": {
+        "unit": "TOKENS",
+        "input": 0,
+        "output": 0,
+        "total": 0
+      }
+    },
+    {
+      "id": "e89971ac85f743c7",
+      "traceId": "53062cbb10e0991ad336a10b148f615f",
+      "startTime": "9999-12-31T23:59:59.000Z",
+      "endTime": "9999-12-31T23:59:59.000Z",
+      "projectId": "assistant",
+      "parentObservationId": "921daa305d6b9603",
+      "type": "GENERATION",
+      "environment": "default",
+      "name": "ChatOpenAI",
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "version": null,
+      "createdAt": "9999-12-31T23:59:59.000Z",
+      "updatedAt": "9999-12-31T23:59:59.000Z",
+      "input": [
+        {
+          "role": "system",
+          "content": "You are the university special courses desk. Use the tools before answering; course ids come from spec_course_find. Answer briefly."
+        },
+        {
+          "role": "user",
+          "content": "Enroll me as Sasha in Board Game Theory."
+        },
+        {
+          "role": "assistant",
+          "content": "I'll find that course first.",
+          "tool_calls": [
+            {
+              "name": "spec_course_find",
+              "args": {
+                "query": "board"
+              },
+              "id": "call_2fb2c87ca9c94435ae16a1fa",
+              "type": "tool_call"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "sc-04: Board Game Theory",
+          "tool_call_id": "call_2fb2c87ca9c94435ae16a1fa"
+        },
+        {
+          "role": "assistant",
+          "content": "\n\n",
+          "tool_calls": [
+            {
+              "name": "spec_course_enroll",
+              "args": {
+                "course_id": "sc-04",
+                "student": "Sasha"
+              },
+              "id": "call_ac9890cb3f394c948a3338e87357df60",
+              "type": "tool_call"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "User rejected the tool call for `spec_course_enroll` with reason: Wait, I only wanted the schedule, not an enrollment.",
+          "tool_call_id": "call_ac9890cb3f394c948a3338e87357df60"
+        },
+        {
+          "role": "assistant",
+          "content": "Understood — no enrollment made. Here's the schedule infoinstead:",
+          "tool_calls": [
+            {
+              "name": "spec_course_info",
+              "args": {
+                "course_id": "sc-04"
+              },
+              "id": "call_ed5570da272245ca812c579a",
+              "type": "tool_call"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "Board Game Theory: Wednesday 19:00, Student club, teacher D. Orlov, 3 seats free.",
+          "tool_call_id": "call_ed5570da272245ca812c579a"
+        },
+        {
+          "role": "assistant",
+          "content": "**Board Game Theory (sc-04)**\n- Wednesday, 19:00\n- Room: Student club\n- Teacher: D. Orlov\n- Free seats: 3\n\nLet me know if you'd like me to enroll you."
+        },
+        {
+          "role": "user",
+          "content": "Okay, now enroll me as Sasha in Board Game Theory."
+        },
+        {
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "name": "spec_course_enroll",
+              "args": {
+                "course_id": "sc-04",
+                "student": "Sasha"
+              },
+              "id": "call_0_196f5759118245c1",
+              "type": "tool_call"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "Enrolled Sasha in Board Game Theory. 2 seats left.",
+          "tool_call_id": "call_0_196f5759118245c1"
+        },
+        {
+          "role": "tool",
+          "content": {
+            "type": "function",
+            "function": {
+              "name": "spec_course_find",
+              "description": "Find university special courses by one word.",
+              "parameters": {
+                "properties": {
+                  "query": {
+                    "description": "A title word, a topic tag or a weekday, for example 'ai' or 'friday'. Returns course ids for spec_course_info and spec_course_enroll.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "query"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "role": "tool",
+          "content": {
+            "type": "function",
+            "function": {
+              "name": "spec_course_info",
+              "description": "Show the schedule, room, teacher and free seats of one course.",
+              "parameters": {
+                "properties": {
+                  "course_id": {
+                    "description": "A course id from spec_course_find, for example 'sc-01'.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "course_id"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "role": "tool",
+          "content": {
+            "type": "function",
+            "function": {
+              "name": "spec_course_enroll",
+              "description": "Enroll the named student in one course.",
+              "parameters": {
+                "properties": {
+                  "course_id": {
+                    "description": "A course id from spec_course_find, for example 'sc-02'.",
+                    "type": "string"
+                  },
+                  "student": {
+                    "description": "Name of the student to enroll.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "course_id",
+                  "student"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      ],
+      "output": {
+        "role": "assistant",
+        "content": "Done — you're enrolled in **Board Game Theory** (sc-04). 2 seats left."
+      },
+      "metadata": {
+        "tags": [
+          "seq:step:1"
+        ],
+        "ls_integration": "langchain_chat_model",
+        "thread_id": "session-06",
+        "langgraph_step": 17,
+        "langgraph_node": "model",
+        "langgraph_triggers": [
+          "branch:to:model"
+        ],
+        "langgraph_path": [
+          "__pregel_pull",
+          "model"
+        ],
+        "langgraph_checkpoint_ns": "model:b6e5e240-f202-51ac-f662-53cf1e833c86",
+        "checkpoint_ns": "model:b6e5e240-f202-51ac-f662-53cf1e833c86",
+        "ls_provider": "openai",
+        "ls_model_name": "deepseek/deepseek-v4.1-flash@reasoning_effort=none",
+        "ls_model_type": "chat",
+        "lc_versions": {
+          "langchain-core": "1.6.6",
+          "langchain": "1.4.3",
+          "langchain-openai": "1.6.7"
+        },
+        "resourceAttributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.45.0",
+          "service.instance.id": "0b038f15-0e5f-458b-aba0-46ec9bb63999",
+          "service.name": "unknown_service:python3"
+        },
+        "scope": {
+          "name": "langfuse-sdk",
+          "version": "4.16.0",
+          "attributes": {
+            "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+          }
+        }
+      },
+      "model": "deepseek/deepseek-v4.1-flash@reasoning_effort=none",
+      "modelParameters": {},
+      "completionStartTime": "9999-12-31T23:59:59.000Z",
+      "promptId": null,
+      "promptName": null,
+      "promptVersion": null,
+      "latency": 0,
+      "timeToFirstToken": 0,
+      "usageDetails": {
+        "input": 432,
+        "output": 22,
+        "total": 966,
+        "input_audio": 0,
+        "input_cache_creation": 0,
+        "input_cache_read": 512,
+        "output_audio": 0,
+        "output_reasoning": 0
+      },
+      "costDetails": {},
+      "usagePricingTierId": null,
+      "usagePricingTierName": null,
+      "inputPrice": 0,
+      "outputPrice": 0,
+      "totalPrice": 0,
+      "calculatedInputCost": null,
+      "calculatedOutputCost": null,
+      "calculatedTotalCost": 0,
+      "unit": "TOKENS",
+      "promptTokens": 944,
+      "completionTokens": 22,
+      "totalTokens": 966,
+      "modelId": null,
+      "usage": {
+        "unit": "TOKENS",
+        "input": 944,
+        "output": 22,
+        "total": 966
+      }
+    },
+    {
+      "id": "e7a4c1be1ffe3b4a",
+      "traceId": "53062cbb10e0991ad336a10b148f615f",
+      "startTime": "9999-12-31T23:59:59.000Z",
+      "endTime": "9999-12-31T23:59:59.000Z",
+      "projectId": "assistant",
+      "parentObservationId": "12e522a11ba8b900",
+      "type": "TOOL",
+      "environment": "default",
+      "name": "spec_course_enroll",
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "version": null,
+      "createdAt": "9999-12-31T23:59:59.000Z",
+      "updatedAt": "9999-12-31T23:59:59.000Z",
+      "input": {
+        "course_id": "sc-04",
+        "student": "Sasha"
+      },
+      "output": {
+        "content": "Enrolled Sasha in Board Game Theory. 2 seats left.",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "spec_course_enroll",
+        "id": null,
+        "tool_call_id": "call_0_196f5759118245c1",
+        "artifact": null,
+        "status": "success"
+      },
+      "metadata": {
+        "tags": [
+          "seq:step:1"
+        ],
+        "ls_integration": "langchain_create_agent",
+        "thread_id": "session-06",
+        "langgraph_step": 16,
+        "langgraph_node": "tools",
+        "langgraph_triggers": [
+          "__pregel_push"
+        ],
+        "langgraph_path": [
+          "__pregel_push",
+          0,
+          false
+        ],
+        "langgraph_checkpoint_ns": "tools:9b757dda-cf7d-a529-6175-47068dd99e8c",
+        "checkpoint_ns": "tools:9b757dda-cf7d-a529-6175-47068dd99e8c",
+        "color": "green",
+        "tool_call_id": "call_0_196f5759118245c1",
+        "resourceAttributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.45.0",
+          "service.instance.id": "0b038f15-0e5f-458b-aba0-46ec9bb63999",
+          "service.name": "unknown_service:python3"
+        },
+        "scope": {
+          "name": "langfuse-sdk",
+          "version": "4.16.0",
+          "attributes": {
+            "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+          }
+        }
+      },
+      "model": null,
+      "modelParameters": {},
+      "completionStartTime": null,
+      "promptId": null,
+      "promptName": null,
+      "promptVersion": null,
+      "latency": 0,
+      "timeToFirstToken": null,
+      "usageDetails": {},
+      "costDetails": {},
+      "usagePricingTierId": null,
+      "usagePricingTierName": null,
+      "inputPrice": 0,
+      "outputPrice": 0,
+      "totalPrice": 0,
+      "calculatedInputCost": null,
+      "calculatedOutputCost": null,
+      "calculatedTotalCost": 0,
+      "unit": "TOKENS",
+      "promptTokens": 0,
+      "completionTokens": 0,
+      "totalTokens": 0,
+      "modelId": null,
+      "usage": {
+        "unit": "TOKENS",
+        "input": 0,
+        "output": 0,
+        "total": 0
+      }
+    },
+    {
+      "id": "12e522a11ba8b900",
+      "traceId": "53062cbb10e0991ad336a10b148f615f",
+      "startTime": "9999-12-31T23:59:59.000Z",
+      "endTime": "9999-12-31T23:59:59.000Z",
+      "projectId": "assistant",
+      "parentObservationId": "60b98ce64de24502",
+      "type": "CHAIN",
+      "environment": "default",
+      "name": "tools",
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "version": null,
+      "createdAt": "9999-12-31T23:59:59.000Z",
+      "updatedAt": "9999-12-31T23:59:59.000Z",
+      "input": [
+        {
+          "name": "spec_course_enroll",
+          "args": {
+            "course_id": "sc-04",
+            "student": "Sasha"
+          },
+          "id": "call_0_196f5759118245c1",
+          "type": "tool_call"
+        }
+      ],
+      "output": {
+        "messages": [
+          {
+            "content": "Enrolled Sasha in Board Game Theory. 2 seats left.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_enroll",
+            "id": "0468ea1b-e9cb-450b-b79c-38820c19d679",
+            "tool_call_id": "call_0_196f5759118245c1",
+            "artifact": null,
+            "status": "success"
+          }
+        ]
+      },
+      "metadata": {
+        "tags": [
+          "graph:step:16"
+        ],
+        "ls_integration": "langchain_create_agent",
+        "thread_id": "session-06",
+        "langgraph_step": 16,
+        "langgraph_node": "tools",
+        "langgraph_triggers": [
+          "__pregel_push"
+        ],
+        "langgraph_path": [
+          "__pregel_push",
+          0,
+          false
+        ],
+        "langgraph_checkpoint_ns": "tools:9b757dda-cf7d-a529-6175-47068dd99e8c",
+        "resourceAttributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.45.0",
+          "service.instance.id": "0b038f15-0e5f-458b-aba0-46ec9bb63999",
+          "service.name": "unknown_service:python3"
+        },
+        "scope": {
+          "name": "langfuse-sdk",
+          "version": "4.16.0",
+          "attributes": {
+            "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+          }
+        }
+      },
+      "model": null,
+      "modelParameters": {},
+      "completionStartTime": null,
+      "promptId": null,
+      "promptName": null,
+      "promptVersion": null,
+      "latency": 0,
+      "timeToFirstToken": null,
+      "usageDetails": {},
+      "costDetails": {},
+      "usagePricingTierId": null,
+      "usagePricingTierName": null,
+      "inputPrice": 0,
+      "outputPrice": 0,
+      "totalPrice": 0,
+      "calculatedInputCost": null,
+      "calculatedOutputCost": null,
+      "calculatedTotalCost": 0,
+      "unit": "TOKENS",
+      "promptTokens": 0,
+      "completionTokens": 0,
+      "totalTokens": 0,
+      "modelId": null,
+      "usage": {
+        "unit": "TOKENS",
+        "input": 0,
+        "output": 0,
+        "total": 0
+      }
+    },
+    {
+      "id": "e49512620f6f8d81",
+      "traceId": "53062cbb10e0991ad336a10b148f615f",
+      "startTime": "9999-12-31T23:59:59.000Z",
+      "endTime": "9999-12-31T23:59:59.000Z",
+      "projectId": "assistant",
+      "parentObservationId": "60b98ce64de24502",
+      "type": "CHAIN",
+      "environment": "default",
+      "name": "HumanInTheLoopMiddleware.after_model",
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "version": null,
+      "createdAt": "9999-12-31T23:59:59.000Z",
+      "updatedAt": "9999-12-31T23:59:59.000Z",
+      "input": {
+        "messages": [
+          {
+            "content": "Enroll me as Sasha in Board Game Theory.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": "e8551e00-4150-4286-9997-8b17bdbcf4ad"
+          },
+          {
+            "content": "I'll find that course first.",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-a314-7103-b6ab-6b96c6a47ec0",
+            "tool_calls": [
+              {
+                "name": "spec_course_find",
+                "args": {
+                  "query": "board"
+                },
+                "id": "call_2fb2c87ca9c94435ae16a1fa",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 524,
+              "output_tokens": 47,
+              "total_tokens": 571,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "sc-04: Board Game Theory",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_find",
+            "id": "11c9daaa-1ef6-4312-b928-a9ccaffd0c28",
+            "tool_call_id": "call_2fb2c87ca9c94435ae16a1fa",
+            "artifact": null,
+            "status": "success"
+          },
+          {
+            "content": "\n\n",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-b094-7302-9f88-fd5da50fc3a1",
+            "tool_calls": [
+              {
+                "name": "spec_course_enroll",
+                "args": {
+                  "course_id": "sc-04",
+                  "student": "Sasha"
+                },
+                "id": "call_ac9890cb3f394c948a3338e87357df60",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 601,
+              "output_tokens": 61,
+              "total_tokens": 662,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 512
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "User rejected the tool call for `spec_course_enroll` with reason: Wait, I only wanted the schedule, not an enrollment.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_enroll",
+            "id": "caa90b4f-239a-47aa-bbe7-88a93650b239",
+            "tool_call_id": "call_ac9890cb3f394c948a3338e87357df60",
+            "artifact": null,
+            "status": "error"
+          },
+          {
+            "content": "Understood — no enrollment made. Here's the schedule infoinstead:",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-bc25-76f2-95e3-46e4fcb4f39b",
+            "tool_calls": [
+              {
+                "name": "spec_course_info",
+                "args": {
+                  "course_id": "sc-04"
+                },
+                "id": "call_ed5570da272245ca812c579a",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 688,
+              "output_tokens": 55,
+              "total_tokens": 743,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "Board Game Theory: Wednesday 19:00, Student club, teacher D. Orlov, 3 seats free.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_info",
+            "id": "f14b21b4-44ec-4386-ad6a-5f2108386dcf",
+            "tool_call_id": "call_ed5570da272245ca812c579a",
+            "artifact": null,
+            "status": "success"
+          },
+          {
+            "content": "**Board Game Theory (sc-04)**\n- Wednesday, 19:00\n- Room: Student club\n- Teacher: D. Orlov\n- Free seats: 3\n\nLet me know if you'd like me to enroll you.",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "stop",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-c950-7240-870a-308742c2937b",
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 779,
+              "output_tokens": 52,
+              "total_tokens": 831,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 512
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "Okay, now enroll me as Sasha in Board Game Theory.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": "120912ad-6da0-4336-9e8d-2f75abbf0d16"
+          },
+          {
+            "content": "",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-d9ab-7c43-862b-e7f2d9f67063",
+            "tool_calls": [
+              {
+                "name": "spec_course_enroll",
+                "args": {
+                  "course_id": "sc-04",
+                  "student": "Sasha"
+                },
+                "id": "call_0_196f5759118245c1",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 847,
+              "output_tokens": 61,
+              "total_tokens": 908,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 768
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "Enrolled Sasha in Board Game Theory. 2 seats left.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_enroll",
+            "id": "0468ea1b-e9cb-450b-b79c-38820c19d679",
+            "tool_call_id": "call_0_196f5759118245c1",
+            "artifact": null,
+            "status": "success"
+          },
+          {
+            "content": "Done — you're enrolled in **Board Game Theory** (sc-04). 2 seats left.",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "stop",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-e5ea-71a0-b65f-077a76763f1e",
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 944,
+              "output_tokens": 22,
+              "total_tokens": 966,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 512
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          }
+        ],
+        "hitl_edited_tool_calls": {}
+      },
+      "output": null,
+      "metadata": {
+        "tags": [
+          "graph:step:18"
+        ],
+        "ls_integration": "langchain_create_agent",
+        "thread_id": "session-06",
+        "langgraph_step": 18,
+        "langgraph_node": "HumanInTheLoopMiddleware.after_model",
+        "langgraph_triggers": [
+          "branch:to:HumanInTheLoopMiddleware.after_model"
+        ],
+        "langgraph_path": [
+          "__pregel_pull",
+          "HumanInTheLoopMiddleware.after_model"
+        ],
+        "langgraph_checkpoint_ns": "HumanInTheLoopMiddleware.after_model:73d5189c-ca3b-a146-94cd-649b36846a25",
+        "resourceAttributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.45.0",
+          "service.instance.id": "0b038f15-0e5f-458b-aba0-46ec9bb63999",
+          "service.name": "unknown_service:python3"
+        },
+        "scope": {
+          "name": "langfuse-sdk",
+          "version": "4.16.0",
+          "attributes": {
+            "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+          }
+        }
+      },
+      "model": null,
+      "modelParameters": {},
+      "completionStartTime": null,
+      "promptId": null,
+      "promptName": null,
+      "promptVersion": null,
+      "latency": 0,
+      "timeToFirstToken": null,
+      "usageDetails": {},
+      "costDetails": {},
+      "usagePricingTierId": null,
+      "usagePricingTierName": null,
+      "inputPrice": 0,
+      "outputPrice": 0,
+      "totalPrice": 0,
+      "calculatedInputCost": null,
+      "calculatedOutputCost": null,
+      "calculatedTotalCost": 0,
+      "unit": "TOKENS",
+      "promptTokens": 0,
+      "completionTokens": 0,
+      "totalTokens": 0,
+      "modelId": null,
+      "usage": {
+        "unit": "TOKENS",
+        "input": 0,
+        "output": 0,
+        "total": 0
+      }
+    },
+    {
+      "id": "47f1a5fe9b9559ad",
+      "traceId": "53062cbb10e0991ad336a10b148f615f",
+      "startTime": "9999-12-31T23:59:59.000Z",
+      "endTime": "9999-12-31T23:59:59.000Z",
+      "projectId": "assistant",
+      "parentObservationId": "60b98ce64de24502",
+      "type": "CHAIN",
+      "environment": "default",
+      "name": "HumanInTheLoopMiddleware.after_model",
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "version": null,
+      "createdAt": "9999-12-31T23:59:59.000Z",
+      "updatedAt": "9999-12-31T23:59:59.000Z",
+      "input": {
+        "messages": [
+          {
+            "content": "Enroll me as Sasha in Board Game Theory.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": "e8551e00-4150-4286-9997-8b17bdbcf4ad"
+          },
+          {
+            "content": "I'll find that course first.",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-a314-7103-b6ab-6b96c6a47ec0",
+            "tool_calls": [
+              {
+                "name": "spec_course_find",
+                "args": {
+                  "query": "board"
+                },
+                "id": "call_2fb2c87ca9c94435ae16a1fa",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 524,
+              "output_tokens": 47,
+              "total_tokens": 571,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "sc-04: Board Game Theory",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_find",
+            "id": "11c9daaa-1ef6-4312-b928-a9ccaffd0c28",
+            "tool_call_id": "call_2fb2c87ca9c94435ae16a1fa",
+            "artifact": null,
+            "status": "success"
+          },
+          {
+            "content": "\n\n",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-b094-7302-9f88-fd5da50fc3a1",
+            "tool_calls": [
+              {
+                "name": "spec_course_enroll",
+                "args": {
+                  "course_id": "sc-04",
+                  "student": "Sasha"
+                },
+                "id": "call_ac9890cb3f394c948a3338e87357df60",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 601,
+              "output_tokens": 61,
+              "total_tokens": 662,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 512
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "User rejected the tool call for `spec_course_enroll` with reason: Wait, I only wanted the schedule, not an enrollment.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_enroll",
+            "id": "caa90b4f-239a-47aa-bbe7-88a93650b239",
+            "tool_call_id": "call_ac9890cb3f394c948a3338e87357df60",
+            "artifact": null,
+            "status": "error"
+          },
+          {
+            "content": "Understood — no enrollment made. Here's the schedule infoinstead:",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-bc25-76f2-95e3-46e4fcb4f39b",
+            "tool_calls": [
+              {
+                "name": "spec_course_info",
+                "args": {
+                  "course_id": "sc-04"
+                },
+                "id": "call_ed5570da272245ca812c579a",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 688,
+              "output_tokens": 55,
+              "total_tokens": 743,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "Board Game Theory: Wednesday 19:00, Student club, teacher D. Orlov, 3 seats free.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "spec_course_info",
+            "id": "f14b21b4-44ec-4386-ad6a-5f2108386dcf",
+            "tool_call_id": "call_ed5570da272245ca812c579a",
+            "artifact": null,
+            "status": "success"
+          },
+          {
+            "content": "**Board Game Theory (sc-04)**\n- Wednesday, 19:00\n- Room: Student club\n- Teacher: D. Orlov\n- Free seats: 3\n\nLet me know if you'd like me to enroll you.",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "stop",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-c950-7240-870a-308742c2937b",
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 779,
+              "output_tokens": 52,
+              "total_tokens": 831,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 512
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "Okay, now enroll me as Sasha in Board Game Theory.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": "120912ad-6da0-4336-9e8d-2f75abbf0d16"
+          },
+          {
+            "content": "",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-d9ab-7c43-862b-e7f2d9f67063",
+            "tool_calls": [
+              {
+                "name": "spec_course_enroll",
+                "args": {
+                  "course_id": "sc-04",
+                  "student": "Sasha"
+                },
+                "id": "call_0_196f5759118245c1",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 847,
+              "output_tokens": 61,
+              "total_tokens": 908,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 768
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          }
+        ],
+        "hitl_edited_tool_calls": {}
+      },
+      "output": {
+        "messages": [
+          {
+            "content": "",
+            "additional_kwargs": {},
+            "response_metadata": {
+              "finish_reason": "tool_calls",
+              "model_name": "deepseek/deepseek-v4.1-flash",
+              "model_provider": "openai"
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--01a1da99-d9ab-7c43-862b-e7f2d9f67063",
+            "tool_calls": [
+              {
+                "name": "spec_course_enroll",
+                "args": {
+                  "course_id": "sc-04",
+                  "student": "Sasha"
+                },
+                "id": "call_0_196f5759118245c1",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 847,
+              "output_tokens": 61,
+              "total_tokens": 908,
+              "input_token_details": {
+                "audio": 0,
+                "cache_creation": 0,
+                "cache_read": 768
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          }
+        ],
+        "hitl_edited_tool_calls": {}
+      },
+      "metadata": {
+        "tags": [
+          "graph:step:15"
+        ],
+        "ls_integration": "langchain_create_agent",
+        "thread_id": "session-06",
+        "langgraph_step": 15,
+        "langgraph_node": "HumanInTheLoopMiddleware.after_model",
+        "langgraph_triggers": [
+          "branch:to:HumanInTheLoopMiddleware.after_model"
+        ],
+        "langgraph_path": [
+          "__pregel_pull",
+          "HumanInTheLoopMiddleware.after_model"
+        ],
+        "langgraph_checkpoint_ns": "HumanInTheLoopMiddleware.after_model:003b5add-439e-d1cc-83f3-565863c09c98",
+        "resourceAttributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.45.0",
+          "service.instance.id": "0b038f15-0e5f-458b-aba0-46ec9bb63999",
+          "service.name": "unknown_service:python3"
+        },
+        "scope": {
+          "name": "langfuse-sdk",
+          "version": "4.16.0",
+          "attributes": {
+            "public_key": "pk-lf-90f50cb68f8133d6599eb58fd787b052"
+          }
+        }
+      },
+      "model": null,
+      "modelParameters": {},
+      "completionStartTime": null,
+      "promptId": null,
+      "promptName": null,
+      "promptVersion": null,
+      "latency": 0,
+      "timeToFirstToken": null,
+      "usageDetails": {},
+      "costDetails": {},
+      "usagePricingTierId": null,
+      "usagePricingTierName": null,
+      "inputPrice": 0,
+      "outputPrice": 0,
+      "totalPrice": 0,
+      "calculatedInputCost": null,
+      "calculatedOutputCost": null,
+      "calculatedTotalCost": 0,
+      "unit": "TOKENS",
+      "promptTokens": 0,
+      "completionTokens": 0,
+      "totalTokens": 0,
+      "modelId": null,
+      "usage": {
+        "unit": "TOKENS",
+        "input": 0,
+        "output": 0,
+        "total": 0
+      }
+    }
+  ],
+  "htmlPath": "/project/assistant/traces/53062cbb10e0991ad336a10b148f615f",
+  "totalCost": 0
+}

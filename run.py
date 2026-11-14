@@ -8,7 +8,8 @@ from typing import NotRequired
 
 from dotenv import load_dotenv
 from langchain.agents import create_agent
-from langchain.agents.middleware import AgentState, after_agent, dynamic_prompt, wrap_tool_call
+from langchain.agents.middleware import (AgentState, HumanInTheLoopMiddleware, after_agent,
+                                         dynamic_prompt, wrap_tool_call)
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import HumanMessage, RemoveMessage, SystemMessage
 from langchain_core.tools import tool
@@ -112,6 +113,7 @@ def spec_course_enroll(course_id: str, student: str) -> str:
 
 
 TOOLS = [spec_course_find, spec_course_info, spec_course_enroll]
+GATED = {"spec_course_enroll": True}
 SYSTEM = ("You are the university special courses desk. Use the tools before answering; "
           "course ids come from spec_course_find. Answer briefly.")
 
@@ -246,13 +248,14 @@ def sqlite_checkpointer(path: str = "assistant.db") -> SqliteSaver:
     return SqliteSaver(sqlite3.connect(path, check_same_thread=False))
 
 
-def build_agent(checkpointer=None, summarization: bool = True, store=None):
+def build_agent(checkpointer=None, summarization: bool = True, store=None, approvals=None):
     prompt = [desk_prompt] if summarization or store is not None else []
     fold = [summarize] if summarization else []
     guest = [patch_profile] if store is not None else []
+    guard = [HumanInTheLoopMiddleware(interrupt_on=approvals)] if approvals else []
     tools = TOOLS + (MEMORY_TOOLS if store is not None else [])
     return create_agent(cheap_model(), tools, system_prompt=SYSTEM, checkpointer=checkpointer,
-                        store=store, middleware=[log_tool_call, *prompt, *fold, *guest])
+                        store=store, middleware=[log_tool_call, *prompt, *fold, *guest, *guard])
 
 
 def print_schemas() -> None:
