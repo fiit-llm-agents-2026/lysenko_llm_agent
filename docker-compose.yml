@@ -147,6 +147,52 @@ services:
       timeout: 10s
       retries: 10
 
+  api:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}@db:5432/postgres
+      DATA_DIR: /data
+      LANGFUSE_HOST: http://langfuse-web:3000
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - parcel-store:/data
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  bot:
+    build: .
+    restart: unless-stopped
+    command: python bot.py
+    environment:
+      API_URL: http://api:8000
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:?set TELEGRAM_BOT_TOKEN in .env}
+    depends_on:
+      api:
+        condition: service_healthy
+
+  db:
+    image: docker.io/postgres:${POSTGRES_VERSION:-17}
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+    volumes:
+      - parcel-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
   postgres:
     image: docker.io/postgres:${POSTGRES_VERSION:-17}
     restart: always
@@ -167,6 +213,10 @@ services:
       - langfuse_postgres_data:/var/lib/postgresql/data
 
 volumes:
+  parcel-pgdata:
+    driver: local
+  parcel-store:
+    driver: local
   langfuse_postgres_data:
     driver: local
   langfuse_clickhouse_data:

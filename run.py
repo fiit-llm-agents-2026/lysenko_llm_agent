@@ -8,8 +8,9 @@ from typing import NotRequired
 
 from dotenv import load_dotenv
 from langchain.agents import create_agent
-from langchain.agents.middleware import (AgentState, HumanInTheLoopMiddleware, after_agent,
-                                         dynamic_prompt, wrap_tool_call)
+from langchain.agents.middleware import (AgentMiddleware, AgentState,
+                                         HumanInTheLoopMiddleware, after_agent,
+                                         dynamic_prompt)
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import HumanMessage, RemoveMessage, SystemMessage
 from langchain_core.tools import tool
@@ -181,10 +182,17 @@ MEMORY_RULES = ("Greet a student you already know by name. Save one fact per "
                 "save_memory call; read them back with search_memories.")
 
 
-@wrap_tool_call
-def log_tool_call(request, handler):
-    print(f"[tool] {request.tool_call['name']}({request.tool_call['args']})")
-    return handler(request)
+class LogToolCall(AgentMiddleware):
+    def wrap_tool_call(self, request, handler):
+        print(f"[tool] {request.tool_call['name']}({request.tool_call['args']})")
+        return handler(request)
+
+    async def awrap_tool_call(self, request, handler):
+        print(f"[tool] {request.tool_call['name']}({request.tool_call['args']})")
+        return await handler(request)
+
+
+log_tool_call = LogToolCall()
 
 
 class CoursesState(AgentState):

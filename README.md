@@ -68,3 +68,29 @@ uv run pytest -q
 ```
 
 Разбор трейса, цены и узлов — в `runs/session-07.md`.
+
+## Деплой
+
+`service.py` — FastAPI-обёртка графа: `POST /chat/{thread_id}` отдаёт SSE, `GET /health` показывает выбранную ветку. `bot.py` — aiogram long polling; бот ходит в API, поэтому Telegram и веб-клиент делят один Postgres-checkpointer. Долгая память разделена по `from_user.id` (`X-User-Id`): профиль хранится отдельно у каждого участника, хотя тред группового чата общий.
+
+```
+# заполните .env по .env.example: LLM_*, LANGFUSE_*, TELEGRAM_BOT_TOKEN, POSTGRES_PASSWORD
+docker compose up -d --build
+```
+
+Внутри compose `DATABASE_URL` смотрит на отдельный сервис `db`, а не на `postgres` Langfuse. Чекпоинты диалогов лежат в `parcel-pgdata`; профиль и `save_memory` — в `SqliteStore` на volume `parcel-store` (`/data/memory.db`). Проверка живучести:
+
+```
+docker compose restart api
+curl -s localhost:8000/health
+```
+
+Разбор прогона и restart drill — в `runs/session-08.md`.
+
+## Баланс провайдера
+
+`balance.py` — починенная версия утилиты из лекции: читает `.env`, ходит в `/v2/balance` Polza и печатает доступную сумму, баланс и расход, не выводя ключ.
+
+```
+uv run python balance.py
+```

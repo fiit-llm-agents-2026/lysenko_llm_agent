@@ -1,0 +1,11 @@
+.env
+.git
+.venv
+__pycache__
+*.db
+*.db-*
+notebooks
+runs
+tests
+.pytest_cache
+.ruff_cache
